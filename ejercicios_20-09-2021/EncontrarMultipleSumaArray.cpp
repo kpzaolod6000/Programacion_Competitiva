@@ -7,19 +7,14 @@ using namespace std;
 int showMultiple(int array[],int n,int k){
     
     int cnt = 0;
-    for(int i = 0; i < n; i++){
-        
-        for(int j = i ; j < n; j++ ){
-            cout<<"[ ";
-            int sums = 0;
-            for (int l = i ; l <= j; l++){
-                cout<<array[l]<<" ";
-                sums += array[l];
+    for(int i=0; i<n; i++){
+        int sum = 0;
+        for(int j=i; j<n; j++){
+            sum+=array[j];
+            if(sum%k == 0){
+                cnt++;
             }
-            cout<<"] ";
-            if (sums % k == 0) cnt++;
         }
-        cout<<"\n";  
     }
     return cnt;
 }
