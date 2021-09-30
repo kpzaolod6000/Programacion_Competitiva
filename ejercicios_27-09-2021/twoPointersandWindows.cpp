@@ -2,15 +2,53 @@
 
 using namespace std;
 
+
+// void twoPointer(int* arr,int n,int target){
+    
+//     int mdio = (n-1)/2;
+//     int izq = mdio, der = mdio+1;
+//     int sum;
+
+//     sum = arr[izq] + arr[der];
+//     while(sum != target){
+
+//         sum = arr[izq] + arr[der];
+//         if (sum > target)
+//         {
+//             izq--;
+//             if(izq < 0) izq = n-1;
+            
+//             if (izq == mdio) break;
+
+//         }else if(sum < target){
+            
+//             der++;
+//             if(der > n-1) der = 0;
+            
+//             if( der == mdio+1) break;
+//         }
+//     }
+
+//     if (izq == der) {
+//         cout << "IMPOSSIBLE\n";
+//     }else{
+//         cout << izq+1 <<" " <<der+1<<"\n";
+//     }
+// }
+
+
 void twoPointer(int* arr,int n,int target){ // complejidad n
     
     int in = 0,en = n-1;
     // int endP = *(arr+(n-1));
     // cout << endP << "\n";
+    
+    vector<int> vector_ (arr, arr+n);
+    sort (vector_.begin(), vector_.begin()+n); // ver el ordenamiento de los indices
 
-    while(in != en){
-        if (*(arr+in) + * (arr+en) < target ) in++;
-        else if (*(arr+in) + * (arr+en) > target ) en--;
+    while(in < en){
+        if (vector_[in] + vector_[en] < target ) in++;
+        else if (vector_[in] + vector_[en] > target ) en--;
         else break;
     }
     if (in == en) {
