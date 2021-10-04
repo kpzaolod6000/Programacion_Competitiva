@@ -1,4 +1,3 @@
-#include <iostream>
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -17,15 +16,17 @@ int main(){
     //     }
     // }
     // cout << cont <<"\n";
-
-    int n,k,t;
-    int cont = 0;
+    int n,k,value,cnt = 0;
+    
     cin>>n>>k;
-    for(int i=0;i<n;i++){
-        cin>>t;
-        if(t%k==0) cont++;
+
+    for (size_t i = 0; i < n; i++)
+    {
+        cin>>value;
+        cnt = (value % k == 0) ? cnt + 1 : cnt; 
     }
-    cout << cont <<"\n";
+    
+    cout<<cnt<<"\n";
     
     return 0;
 }
