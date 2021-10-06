@@ -1,35 +1,47 @@
 #include <bits/stdc++.h>
-
+//algoritmo kadane
 using namespace std;
+
+long int MaxSubarraySum(vector<int> &arr){
+
+    long int maxSubArr_sum = 0;
+    long int current_maxSubArr_sum = 0;
+    int n = arr.size();
+ 
+    // traverse the given array
+    long int max_ = arr[0];
+    for (int i = 0; i < n; i++)
+    {
+        // max_ = max(max_, arr[i]);
+        if(arr[i] > max_) max_ = arr[i];
+        
+        current_maxSubArr_sum = current_maxSubArr_sum + arr[i];
+
+        if(0 > current_maxSubArr_sum) current_maxSubArr_sum = 0;  
+        // current_maxSubArr_sum = max(current_maxSubArr_sum, 0);
+ 
+        if(current_maxSubArr_sum > maxSubArr_sum) maxSubArr_sum = current_maxSubArr_sum;
+        // maxSubArr_sum = max(maxSubArr_sum,current_maxSubArr_sum);
+    }
+    if (maxSubArr_sum == 0) return max_;
+    
+    return maxSubArr_sum;
+}
 
 
 int main(){
-
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    int sum_ = 7;
-    int n = 5;
-    int arr[] = {2,4,2,5,1};
-    vector<int> vector_ (arr, arr+n);
-    // for (size_t i = 0; i < n; i++)
-    // {
-    //     cout << vector_[i] <<" ";
-    // }
     
-
-    cout << windowsR_min(vector_,n,sum_)<<"\n";
-    // int n = 6;
-    // int array[n] = {1,2,7,9,11,15};
-    // // int array2[n] = {1,2,7,9,11,15};
+    int n,value;
+    cin >> n;
+    vector<int> arr;
+    for (size_t i= 0;i < n; i++){
+        cin>>value;
+        arr.push_back(value);
+    }
     
-    // int n_ = 5;
-    // int array2[n_] = {-1,1,2,3,5};
-
-
-
-    // twoPointer(array,n,11);
-    // twoPointer(array2,n_,5);
+    cout<<MaxSubarraySum(arr)<<"\n";
 
     return 0;
 }
