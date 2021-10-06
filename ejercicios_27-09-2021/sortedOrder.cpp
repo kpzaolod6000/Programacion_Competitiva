@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void sortedOrder(int arr[],int n){
+void sortedOrder(vector<int> arr,int n){//Complejidad n con k²
     
     int in = 0, en = n-1,temp;
     int a,b;
@@ -13,10 +13,10 @@ void sortedOrder(int arr[],int n){
     }
     
 
-    while (arr[in] < 0)
+    while (arr[in] < 0)// k veces
     {
         en = n-1;
-        while(arr[en] > 0){
+        while(arr[en] > 0){// k(n-k) veces
             if(aux[in] > aux[en]){
                 temp = aux[in];
                 aux[in] = aux[en];
@@ -32,18 +32,29 @@ void sortedOrder(int arr[],int n){
     {
         cout << aux[i] <<" ";
     }
-    
-    
-
 }
+
+bool ordSquare(int i,int j){ return(i*i < j*j); }
+
+void sortOrderSquare(vector<int> &arr){
+
+    sort(arr.begin(), arr.end(), ordSquare); 
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     int n=5;
     
-    int array[n] = {-4,-3,1,2,3};
+    vector<int> array = {-4,-3,1,2,3};
     sortedOrder(array,n);
+    vector<int> arr (array.begin(), array.begin()+n);
+    sortOrderSquare(arr);
+    cout<<"\n";
 
+    for(auto x : arr) cout << x*x <<" ";
+    cout<<"\n";
+    
     return 0;
 }

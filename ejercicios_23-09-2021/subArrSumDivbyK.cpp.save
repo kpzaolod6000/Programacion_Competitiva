@@ -5,7 +5,9 @@ using namespace std;
 // int subarraysDivByK(vector<int> &nums,int k){// complejidad O(n^3)
     
 //     int cnt = 0;
-//     int sums;
+//     int sum
+
+;
 
 //     for(size_t i = 0; i < nums.size() ; i++){
 //         for(size_t j = i; j < nums.size() ; j++){
@@ -63,8 +65,7 @@ int subarraysDivByK(vector<int> nums,int k){
     for(size_t i = 0; i < nums.size(); i++){
         
         prefix_sum = (prefix_sum + nums[i]);
-        //mod_k = abs(prefix_sum % k);
-        mod_k = ((prefix_sum % k) + k) % k;
+        mod_k = abs(prefix_sum % k);
         
         if(indxT.count(mod_k)){
             ind = indxT.find(mod_k);
