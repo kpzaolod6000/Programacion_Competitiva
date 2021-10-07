@@ -2,7 +2,7 @@
 
 using namespace std;
 
-vector<int> slidingWindowMax(vector<int> vector_, int n, int k){//complejidad n^2
+vector<int> maxSlidingWindow(vector<int> vector_, int n, int k){//complejidad n^2
     
     int max_;
     vector<int> maxList;
@@ -22,7 +22,7 @@ vector<int> slidingWindowMax(vector<int> vector_, int n, int k){//complejidad n^
 
 
 
-vector<int> slidingWindowMax2(vector<int> &nums, int n, int k){//complejidad n²
+vector<int> maxSlidingWindow2(vector<int> &nums, int n, int k){//complejidad n²
 
     vector<int> max_list;
     deque<int> k_elem;
@@ -85,10 +85,10 @@ int main(){
     vector<int> vector_ (arr, arr+n);
    
 
-    for(auto x: slidingWindowMax(vector_,n,k)) cout<<x<<" ";
+    for(auto x: maxSlidingWindow(vector_,n,k)) cout<<x<<" ";
     cout<<"\n";
     
-    for(auto x: slidingWindowMax2(vector_,n,k)) cout<<x<<" ";
+    for(auto x: maxSlidingWindow2(vector_,n,k)) cout<<x<<" ";
     cout<<"\n";
     
    
