@@ -38,8 +38,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## Ejercicios_20-09-2021
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 
 ### Prefix Sums
 
@@ -86,8 +84,6 @@
 
 
 ## Ejercicios_23-09-2021
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 
 ### SubArray Sum
 
