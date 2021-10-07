@@ -54,7 +54,7 @@ using namespace std;
 //    }
 //}
 
-vector<int> twoPointerArrayAsc(vector<int> arr,int target){//complejidad nlogn
+vector<int> twoPointerArrayAsc(vector<int> arr,int target){//complejidad n
 
     vector<int> idx;
     int n = arr.size();

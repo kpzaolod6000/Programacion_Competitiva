@@ -43,7 +43,7 @@ vector<int> maxSlidingWindow2(vector<int> &nums, int n, int k){//complejidad n²
 
 }
 
-vector<int> maxSlidingWindows3(vector<int> &nums,int k){
+vector<int> maxSlidingWindows3(vector<int> &nums,int k){//complejidad n
     deque<int> slides;
     vector<int> maxValues;
     
