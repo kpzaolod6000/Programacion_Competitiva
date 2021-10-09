@@ -2,13 +2,7 @@
 
 using namespace std;
 
-void swap(int &a,int &b){
-    int tmp;
-    tmp = b;
-    b = a;
-    a = tmp; 
-}
-vector<long int> slidingCost(vector<long int> &arr, int k){
+vector<long int> slidingCost(vector<long int> &arr, int k){ //Complejidad n^2
     vector<long int> cost;
     int n = arr.size();
 
