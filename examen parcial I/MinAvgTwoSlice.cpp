@@ -46,7 +46,7 @@ int MinAvgTwoSlice(vector<int> &nums){// Complejidad n^2 for length slide > 2
     return min_idx;
 }
 
-int MinAvgTwoSlice2(vector<int> &A){
+int MinAvgTwoSlice2(vector<int> &A){//complejidad n
 
     int idx_len2 = -1,idx_len3 = -1;
     float min2 = 200001,min3 = 200001;
