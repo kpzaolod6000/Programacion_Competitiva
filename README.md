@@ -28,8 +28,8 @@
 
 | Name                                                           | Solution                   |
 | -------------------------------------------------------------- | --------------------------               |
-| Min Avg Two Slice                                            | [MinAvgTwoSlice.cpp.cpp](./examen%20parcial%20I/MinAvgTwoSlice) |
-| [Missing Number](https://cses.fi/problemset/task/1083/)        | [1083.cpp](./cpp/1083.cpp) |
+| Min Avg Two Slice                                              | [MinAvgTwoSlice.cpp](./examen%20parcial%20I/MinAvgTwoSlice.cpp) |
+| Genomic Range Query                                            | [GenomicRangeQuery.cpp](./examen%20parcial%20I/GenomicRangeQuery.cpp) |
 
 
 
