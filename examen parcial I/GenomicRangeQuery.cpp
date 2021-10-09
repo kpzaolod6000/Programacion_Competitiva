@@ -65,6 +65,29 @@ vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// CAGC
 
 }
 
+// vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
+//     unordered_map<char,int> ADN;
+//     ADN= {{'A',1},{'C',2},{'G',3},{'T',4}};
+//     vector<int> minImpactFacts;
+//     string::iterator it;
+
+//     for (size_t i = 0; i < P.size(); i++)
+//     {
+
+//         for ( auto it = ADN.cbegin(); it != ADN.cend(); ++it ){
+            
+//             cout<<P[i]<<" "<<Q[i]<<"\n";
+//             string str2 = S.substr(P[i],Q[i]-P[i]);
+//             cout<<str2<<"\n";
+//             size_t found = str2.find(it->first);
+//             if (found!=string::npos){
+//                 minImpactFacts.push_back (ADN[it->first]);
+//                 break;
+//             }
+//         }        
+//     }
+//     return minImpactFacts;
+// }
 
 
 int main(){
@@ -74,9 +97,10 @@ int main(){
     int m,value;
     vector<int> P;
     vector<int> Q;
+  
 
     string S;
-    getline(cin,S);
+    getline(cin, S);
 
     cin>>m;
     for (size_t i = 0; i < m; i++)
