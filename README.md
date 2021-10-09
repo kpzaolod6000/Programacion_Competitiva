@@ -22,6 +22,17 @@
 
 # Programación Competitiva
 
+## EXAMEN PARCIAL 1
+
+### Codigos
+
+| Name                                                           | Solution                   |
+| -------------------------------------------------------------- | --------------------------               |
+| [Min Avg Two Slice]                                            | [MinAvgTwoSlice.cpp.cpp](./examen%20parcial%20I/MinAvgTwoSlice.cpp) |
+| [Missing Number](https://cses.fi/problemset/task/1083/)        | [1083.cpp](./cpp/1083.cpp) |
+
+
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Lista de Ejercicios</summary>
