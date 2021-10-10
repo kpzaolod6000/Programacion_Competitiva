@@ -42,52 +42,54 @@ using namespace std;
 // }
 
 
-vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// CAGCCTA  (N * M)
-    vector<int> minImpactFacts;
-    vector<char> adn_factor;
-    int min_;
-    for (size_t i = 0; i < S.size(); i++)
-    {
-        if (S[i] == 'A') adn_factor.push_back(1);
-        else if (S[i] == 'C') adn_factor.push_back(2);
-        else if (S[i] == 'G') adn_factor.push_back(3);
-        else if (S[i] == 'T') adn_factor.push_back(4);
-    }
-    for (size_t i = 0; i < P.size(); i++)
-    {
-        int in_ = P[i];
-        int en_ = Q[i];
-        min_ = *min_element(adn_factor.begin()+in_,adn_factor.begin()+en_+1); 
-        minImpactFacts.push_back(min_);
-    }
-
-    return minImpactFacts;
-
-}
-
-// vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
-//     unordered_map<char,int> ADN;
-//     ADN= {{'A',1},{'C',2},{'G',3},{'T',4}};
+// vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// CAGCCTA  (N * M)
 //     vector<int> minImpactFacts;
-//     string::iterator it;
-
+//     vector<char> adn_factor;
+//     int min_;
+//     for (size_t i = 0; i < S.size(); i++)
+//     {
+//         if (S[i] == 'A') adn_factor.push_back(1);
+//         else if (S[i] == 'C') adn_factor.push_back(2);
+//         else if (S[i] == 'G') adn_factor.push_back(3);
+//         else if (S[i] == 'T') adn_factor.push_back(4);
+//     }
 //     for (size_t i = 0; i < P.size(); i++)
 //     {
-
-//         for ( auto it = ADN.cbegin(); it != ADN.cend(); ++it ){
-            
-//             cout<<P[i]<<" "<<Q[i]<<"\n";
-//             string str2 = S.substr(P[i],Q[i]-P[i]);
-//             cout<<str2<<"\n";
-//             size_t found = str2.find(it->first);
-//             if (found!=string::npos){
-//                 minImpactFacts.push_back (ADN[it->first]);
-//                 break;
-//             }
-//         }        
+//         int in_ = P[i];
+//         int en_ = Q[i];
+//         min_ = *min_element(adn_factor.begin()+in_,adn_factor.begin()+en_+1); 
+//         minImpactFacts.push_back(min_);
 //     }
+
 //     return minImpactFacts;
+
 // }
+
+bool comp(int a, int b)
+{
+    return (a < b);
+}
+vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
+    unordered_map<char,int> ADN;
+    ADN= {{'A',1},{'C',2},{'G',3},{'T',4}};
+    vector<int> minImpactFacts;
+    string::iterator it;
+
+    for (size_t i = 0; i < P.size(); i++)
+    {
+        string str2 = S.substr(P[i],Q[i]-P[i] + 1);
+        // cout<<str2<<"\n";
+        if (str2.size() == 1) minImpactFacts.push_back (ADN[str2[0]]);
+        else {
+            
+            // sort(str2.begin(), str2.end());
+            // minImpactFacts.push_back (ADN[str2[0]]);
+            it = min_element(str2.begin(),str2.end());
+            minImpactFacts.push_back (ADN[*it]);
+        }    
+    }
+    return minImpactFacts;
+}
 
 
 int main(){
