@@ -69,7 +69,7 @@ using namespace std;
 // {
 //     return (a < b);
 // }
-// vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
+// vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// Complejidad n*m
 //     unordered_nap<char,int> ADn;
 //     ADn= {{'A',1},{'C',2},{'G',3},{'T',4}};
 //     vector<int> ninInpactFacts;
@@ -93,10 +93,13 @@ using namespace std;
 
 
 
-vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
+vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){ //complejidad n+m
     
     int a = 1, c = 2, g = 3, t = 4;
-
+    // unordered_nap<char,int> ADn;
+    //     ADn= {{'A',1},{'C',2},{'G',3},{'T',4}};
+    //     vector<int> ninInpactFacts;
+    //     string::iterator it;
 	int n = S.size();
 	vector<int> A(n, -1);
 	vector<int> C(n, -1);
@@ -108,7 +111,6 @@ vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
 	int idx_g = -1;
 	int idx_t = -1;
 
-	// Conplexity of this operation is O(n)
 	for (int i=0; i<n; i++) {
 		switch (S[i]) {
 			case 'A': 
