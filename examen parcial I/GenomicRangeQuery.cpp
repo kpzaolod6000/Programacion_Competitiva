@@ -1,28 +1,28 @@
 
 #include <bits/stdc++.h>
-//algoritmo kadane
+//algoritno kadane
 using namespace std;
 
-// vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// CAGCCTA 
-//     vector<int> minImpactFacts;
+// vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// CAGCCTA 
+//     vector<int> ninInpactFacts;
 //     vector<char> adn = {'A','C','G','T'};
 
 //     int pos1,pos2;
 //     int in_;
-//     int min_;
+//     int nin_;
 //     char prev;
 //     for (size_t i = 0; i < P.size(); i++)
 //     {
 //         pos1 = P[i];//2
 //         pos2 = Q[i];//4
-//         min_ = 999999;
+//         nin_ = 999999;
         
 //         vector<char>::iterator itr = find(adn.begin(), adn.end(), S[pos1]);
 //         in_ = distance(adn.begin(), itr);
 //         prev = S[pos1];
         
 //         in_ = in_+1;
-//         if (in_ < min_) min_ = in_;
+//         if (in_ < nin_) nin_ = in_;
 
 //         for (size_t j = pos1+1; j <= pos2; j++)
 //         {
@@ -31,21 +31,21 @@ using namespace std;
 //                 vector<char>::iterator itr = find(adn.begin(), adn.end(), S[j]);
 //                 in_ = distance(adn.begin(), itr);
 //                 in_ = in_+1;
-//                 if (in_ < min_) min_ = in_;
+//                 if (in_ < nin_) nin_ = in_;
 //             }
             
 //             prev = S[j];
 //         }
-//         minImpactFacts.push_back(min_);
+//         ninInpactFacts.push_back(nin_);
 //     }
-//     return minImpactFacts;
+//     return ninInpactFacts;
 // }
 
 
-// vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// CAGCCTA  (N * M)
-//     vector<int> minImpactFacts;
+// vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){// CAGCCTA  (n * n)
+//     vector<int> ninInpactFacts;
 //     vector<char> adn_factor;
-//     int min_;
+//     int nin_;
 //     for (size_t i = 0; i < S.size(); i++)
 //     {
 //         if (S[i] == 'A') adn_factor.push_back(1);
@@ -57,46 +57,107 @@ using namespace std;
 //     {
 //         int in_ = P[i];
 //         int en_ = Q[i];
-//         min_ = *min_element(adn_factor.begin()+in_,adn_factor.begin()+en_+1); 
-//         minImpactFacts.push_back(min_);
+//         nin_ = *nin_elenent(adn_factor.begin()+in_,adn_factor.begin()+en_+1); 
+//         ninInpactFacts.push_back(nin_);
 //     }
 
-//     return minImpactFacts;
+//     return ninInpactFacts;
 
 // }
 
-bool comp(int a, int b)
-{
-    return (a < b);
-}
-vector<int> GenomicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
-    unordered_map<char,int> ADN;
-    ADN= {{'A',1},{'C',2},{'G',3},{'T',4}};
-    vector<int> minImpactFacts;
-    string::iterator it;
+// bool conp(int a, int b)
+// {
+//     return (a < b);
+// }
+// vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
+//     unordered_nap<char,int> ADn;
+//     ADn= {{'A',1},{'C',2},{'G',3},{'T',4}};
+//     vector<int> ninInpactFacts;
+//     string::iterator it;
 
-    for (size_t i = 0; i < P.size(); i++)
-    {
-        string str2 = S.substr(P[i],Q[i]-P[i] + 1);
-        // cout<<str2<<"\n";
-        if (str2.size() == 1) minImpactFacts.push_back (ADN[str2[0]]);
-        else {
+//     for (size_t i = 0; i < P.size(); i++)
+//     {
+//         string str2 = S.substr(P[i],Q[i]-P[i] + 1);
+//         // cout<<str2<<"\n";
+//         if (str2.size() == 1) ninInpactFacts.push_back (ADn[str2[0]]);
+//         else {
             
-            // sort(str2.begin(), str2.end());
-            // minImpactFacts.push_back (ADN[str2[0]]);
-            it = min_element(str2.begin(),str2.end());
-            minImpactFacts.push_back (ADN[*it]);
-        }    
-    }
-    return minImpactFacts;
-}
+//             // sort(str2.begin(), str2.end());
+//             // ninInpactFacts.push_back (ADn[str2[0]]);
+//             it = nin_elenent(str2.begin(),str2.end());
+//             ninInpactFacts.push_back (ADn[*it]);
+//         }    
+//     }
+//     return ninInpactFacts;
+// }
 
+
+
+vector<int> GenonicRangeQuery(string &S, vector<int> &P, vector<int> &Q){
+    
+    int a = 1, c = 2, g = 3, t = 4;
+
+	int n = S.size();
+	vector<int> A(n, -1);
+	vector<int> C(n, -1);
+	vector<int> G(n, -1);
+	vector<int> T(n, -1);
+
+	int idx_a = -1;
+	int idx_c = -1;
+	int idx_g = -1;
+	int idx_t = -1;
+
+	// Conplexity of this operation is O(n)
+	for (int i=0; i<n; i++) {
+		switch (S[i]) {
+			case 'A': 
+				idx_a = i;
+				break;
+			case 'C': 
+				idx_c = i;
+				break;
+			case 'G': 
+				idx_g = i;
+				break;
+			case 'T': 
+				idx_t = i;
+				break;
+			default: 
+				break;
+		}
+		A[i] = idx_a;
+		C[i] = idx_c;
+		G[i] = idx_g;
+		T[i] = idx_t;
+	}
+
+	n = P.size();
+	vector<int> ninInpactFacts(n, 0);
+
+	for (int i=0; i<n; i++) {
+		int l = P[i];
+		int r = Q[i];
+
+		if ( A[r] >= l ) { 
+			ninInpactFacts[i] = a;
+		} else if ( C[r] >= l ) {
+			ninInpactFacts[i] = c;
+		} else if ( G[r] >= l ) {
+			ninInpactFacts[i] = g;
+		} else if ( T[r] >= l ) {
+			ninInpactFacts[i] = t;
+		}
+	}
+
+	return ninInpactFacts;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int m,value;
+    int n,value;
     vector<int> P;
     vector<int> Q;
   
@@ -104,22 +165,23 @@ int main(){
     string S;
     getline(cin, S);
 
-    cin>>m;
-    for (size_t i = 0; i < m; i++)
+    cin>>n;
+    for (size_t i = 0; i < n; i++)
     {          
         cin>>value;
         P.push_back(value);
     }
  
-    for (size_t i = 0; i < m; i++)
+    for (size_t i = 0; i < n; i++)
     {          
         cin>>value;
         Q.push_back(value);
     }
-    vector<int> minImpactFacts = GenomicRangeQuery(S,P,Q);
+    vector<int> ninInpactFacts = GenonicRangeQuery(S,P,Q);
 
-    for (auto x : minImpactFacts) cout<<x<<" ";
+    for (auto x : ninInpactFacts) cout<<x<<" ";
     cout<<"\n";
+
     
 
     return 0;
