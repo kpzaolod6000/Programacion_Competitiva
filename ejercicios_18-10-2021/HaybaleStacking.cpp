@@ -38,16 +38,9 @@ int main(){
     cin >> n >>k;
 
     vector<int> arr(n);
-    // for (size_t i= 0;i < n; i++){
-    //     cin>>value;
-    //     arr.push_back(value);
-    // }    
-    // vector<long int> cost = slidingCost(arr,k);
+    
     cout<<HaybaleStacking(arr,k);
 
-    // for(auto elem : arr){
-    //     cout<<elem<<" ";
-    // }
     cout<<"\n";
     return 0;
 }
