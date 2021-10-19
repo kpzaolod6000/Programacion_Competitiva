@@ -26,22 +26,12 @@ int DisastrousDowntime(vector<int> &arr,int k){
     }
     vector<int> sumTime = sums(times);
     sort (sumTime.begin(), sumTime.end());
-    
-    int prev;
-    for(auto elem : sumTime){
-        if(elem > k) break;
-        prev = elem;
-    }
-    return prev;
-
-    // for(auto elem : times){
-    //     cout<<elem<<" ";
+    // for(auto x:sumTime){
+    //     cout<<x<<" ";
     // }
     // cout<<"\n";
-    // vector<int> sumTime = sums(times);
-    // for(auto elem : sumTime){
-    //     cout<<elem<<" ";
-    // }
+    
+    return ceil((1.0 * sumTime[sumTime.size() - 1])/k);
     
 }
 
