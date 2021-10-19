@@ -77,14 +77,14 @@
     } 
     ```
 
-<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-10-2021/DisastrousDowntime.cpp)">code link</a>)</p>
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-10-2021/DisastrousDowntime.cpp">code link</a>)</p>
 
 ### OpenKattis screenshots
 <ul>
 
-<li><img src="./ejercicios_18-10-2021/capturas/openkattis18.JPG" width="550"></li>
-<li><img src="./ejercicios_18-10-2021/capturas/openkattis18_1.JPG" width="550"></li>
-<li><img src="./ejercicios_18-10-2021/capturas/openkattis18_2.JPG" width="550"></li>
+<li><img src="./ejercicios_18-10-2021/capturas/openkattis18.JPG" width="1000"></li>
+<li><img src="./ejercicios_18-10-2021/capturas/openkattis18_1.JPG" width="1000"></li>
+<li><img src="./ejercicios_18-10-2021/capturas/openkattis18_2.JPG" width="1000"></li>
 </ul>
 
 ### Haybale Stacking
@@ -137,7 +137,7 @@
 
   ```
 
-<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-10-2021/HaybaleStacking.cpp)">code link</a>)</p>
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-10-2021/HaybaleStacking.cpp">code link</a>)</p>
 
 
 
