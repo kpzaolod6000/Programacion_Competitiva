@@ -21,22 +21,7 @@ int score_OfParentheses(string s) {
     }
 
     return score_;
-    // stack<int> result_;
-    // result_.push(0);
 
-    // for (size_t i = 0; i <s.size(); i++)
-    // {
-    //     char ch = s[i];
-    //     if (ch == '(') result_.push(0);
-    //     else
-    //     {
-    //         int v = result_.pop();
-    //         int w = result_.pop();
-    //         result_.push(w + max(2 * v, 1));
-    //     }
-        
-    // }
-    // return result_.pop();
     
 }
 
