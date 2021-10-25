@@ -21,6 +21,176 @@
 
 
 # Programación Competitiva
+
+## Ejercicios_20-10-2021
+### Evaluate Reverse Polish Notation
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+
+
+    int evalRPN(vector<string>& tokens){
+        stack<int> result;
+        int x_val,y_val;
+
+        for (size_t i = 0; i < tokens.size(); i++)
+        {
+            string ch = tokens[i];
+            if( ch=="+" || ch=="-" || ch=="*" || ch=="/"){
+                y_val = result.top();
+                result.pop();
+                x_val = result.top();
+                result.pop();
+                if (ch == "+") result.push(x_val + y_val);
+                else if (ch == "-") result.push(x_val - y_val);
+                else if (ch == "*") result.push(x_val * y_val);
+                else if (ch == "/") result.push(x_val / y_val);
+            }else{
+                result.push(stoi(ch));
+            }
+        }
+        return result.top();
+        
+    }
+
+    int main(){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+    
+        
+        vector<string> arr ={"2","1","+","3","*"};
+        cout<<evalRPN(arr)<<"\n";
+        
+        vector<string> arr2 ={"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
+        cout<<evalRPN(arr2)<<"\n";
+        
+        return 0;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_20-10-2021/EvaluateReversePolishNotation.cpp">code link</a>)</p>
+
+
+### LeetCode screenshots
+
+<div>
+<img src="./ejercicios_20-10-2021/Capturas/evalRPN.JPG" width="1000">
+</div>
+
+### Minimum Add to Make Parentheses Valid
+
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int minAddToMakeValid(string s) {
+        stack<char> parenth;
+        parenth.push(s[0]);
+        
+        for (size_t i = 1; i < s.size(); i++)
+        {
+            char ch = s[i];
+            if(parenth.empty()) parenth.push(ch);
+            else 
+            {
+                char ins = parenth.top();
+                
+                if (ins == ch || ch < ins) parenth.push(ch);
+                else parenth.pop();
+            }
+                
+        }
+        return parenth.size();
+        
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        
+        string arr = "())";
+        cout<<minAddToMakeValid(arr)<<"\n";
+        
+        string arr2 ="()))((";
+        cout<<minAddToMakeValid(arr2)<<"\n";
+        
+        return 0;
+
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_20-10-2021/MinimumAddtoMakeParenthesesValid.cpp">code link</a>)</p>
+
+### LeetCode screenshots
+
+<div>
+<img src="./ejercicios_20-10-2021/Capturas/minAddToMakeValid.JPG" width="1000">
+</div>
+
+
+### Score of Parentheses
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int score_OfParentheses(string s) {
+        
+        stack<int> parenthBalanced;
+        int score_ = 0;
+        char ch;
+        
+        for (size_t i = 0; i < s.size(); i++)
+        {
+            ch = s[i];
+            if (ch == '(')
+            {
+                parenthBalanced.push(score_);
+                score_ = 0;
+            }else{
+                score_ = parenthBalanced.top() + max(score_*2,1);
+                parenthBalanced.pop();
+            }
+        }
+
+        return score_;
+
+        
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        string arr ="()()";
+        cout<<score_OfParentheses(arr)<<"\n";
+
+        string arr2 ="(()(()))";
+        cout<<score_OfParentheses(arr2)<<"\n";
+
+        return 0;
+
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_20-10-2021/scoreOfParentheses.cpp">code link</a>)</p>
+
+
+### LeetCode screenshots
+
+<div>
+<img src="./ejercicios_20-10-2021/Capturas/scoreOfParentheses.JPG" width="1000">
+</div>
+
 ## Ejercicios_18-10-2021
 
 ### Disastrous Downtime
