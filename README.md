@@ -67,7 +67,7 @@
 <p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/EvenandOdd.cpp">code link</a>)</p>
 
 
-### Codility screenshots
+### LeetCode screenshots
 
 <div>
 <img src="./ejercicios_21-10-2021/Capturas/evenandodd.JPG" width="1000">
@@ -160,7 +160,7 @@
 <p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/infixToSuffix.cpp">code link</a>)</p>
 
 
-### Codility screenshots
+### LeetCode screenshots
 
 <div>
 <img src="./ejercicios_21-10-2021/Capturas/InfixtoSuffix.JPG" width="1000">
