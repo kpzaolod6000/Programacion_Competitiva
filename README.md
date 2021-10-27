@@ -24,6 +24,73 @@
 
 ## Ejercicios_21-10-2021
 
+
+### Height
+
+* Complejidad O(n*m)
+  ```cpp
+   #include <bits/stdc++.h>
+    using namespace std;
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        int n,citizen,h;
+        cin>>n;
+        stack<int> h_ord;
+        stack<int> aux_;
+        
+
+        while (n--)
+        {
+            cin>>citizen;
+            
+            while (citizen--)
+            {
+                cin>>h;
+                if (h_ord.empty()) h_ord.push(h);
+                else
+                {   
+                    while (!h_ord.empty() && h > h_ord.top())
+                    {
+                        
+                        aux_.push(h_ord.top());
+                        h_ord.pop();
+                    }
+                    h_ord.push(h);
+                    while (!aux_.empty())
+                    {
+                        h_ord.push(aux_.top());
+                        aux_.pop();
+                    }
+                }
+            }
+            while (!h_ord.empty())
+            {
+                cout<<h_ord.top()<<" ";
+                h_ord.pop();
+            }
+            cout<<"\n";
+        }
+        
+        return 0;
+        
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/Height.cpp">code link</a>)</p>
+
+
+### URI Online Judge screenshots
+
+<div>
+<img src="./ejercicios_21-10-2021/Capturas/height.JPG" width="1000">
+</div>
+
+
 ### EvenandOdd
 
 * Complejidad O(n)
@@ -60,14 +127,12 @@
         return 0;
         
     }
-
-
     ```
 
 <p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/EvenandOdd.cpp">code link</a>)</p>
 
 
-### LeetCode screenshots
+### URI Online Judge screenshots
 
 <div>
 <img src="./ejercicios_21-10-2021/Capturas/evenandodd.JPG" width="1000">
@@ -160,7 +225,7 @@
 <p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/infixToSuffix.cpp">code link</a>)</p>
 
 
-### LeetCode screenshots
+### URI Online Judge screenshots
 
 <div>
 <img src="./ejercicios_21-10-2021/Capturas/InfixtoSuffix.JPG" width="1000">
