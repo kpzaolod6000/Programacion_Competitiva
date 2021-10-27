@@ -24,7 +24,147 @@
 
 ## Ejercicios_21-10-2021
 
+### EvenandOdd
 
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        priority_queue<int, vector<int>, greater<int> > even;
+        priority_queue<int> odd;
+    
+        int n,val;
+        cin>>n;
+
+        for (size_t i = 0; i < n; i++)
+        {
+            cin>>val;
+            // if(numOrder.empty()) numOrder.push(val)
+            if (val % 2 == 0 ) even.push(val);
+            else odd.push(val);
+        }
+        while(!even.empty()){
+            cout << even.top() << "\n";
+            even.pop();
+        }
+        while(!odd.empty()){
+            cout << odd.top() << "\n";
+            odd.pop();
+        }
+        return 0;
+        
+    }
+
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/EvenandOdd.cpp">code link</a>)</p>
+
+
+### Codility screenshots
+
+<div>
+<img src="./ejercicios_21-10-2021/Capturas/evenandodd.JPG" width="1000">
+</div>
+
+
+### infixToSuffix
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+
+    int prec(char c) {
+        if(c == '^')
+            return 3;
+        else if(c == '/' || c=='*')
+            return 2;
+        else if(c == '+' || c == '-')
+            return 1;
+        else
+            return -1;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        int n;
+        cin>>n;
+
+        
+        while (n>0)
+        {
+            string text;
+            cin>>text;
+            // for(auto x : infixToSuffix(text)) cout<<x;
+            // cout<<"\n";
+
+            string result = "";
+            stack<char> operator_;
+            char ch;
+
+            for (size_t i = 0; i < text.size(); i++)
+            {
+                ch = text[i];
+                if (isalnum(ch))
+                {
+                    // cout << ch<<"$\n";
+                    result += ch;
+                }
+                else if (ch == '(') operator_.push('(');
+                else if (ch == ')') {
+                    while(operator_.top() != '(')
+                    {
+                        result += operator_.top();
+                        operator_.pop();
+                    }
+                    operator_.pop();//retirando "("
+                }
+                else{
+                    if (!operator_.empty())
+                    {
+                        while(!operator_.empty() && prec(ch) <= prec(operator_.top())) {
+                            result += operator_.top();
+                            operator_.pop();
+                        }
+                        operator_.push(ch);
+                    }else operator_.push(ch);
+                    
+                }
+            }
+            while(!operator_.empty()) {
+                result += operator_.top();
+                operator_.pop();
+            }
+
+            cout << result << "\n";
+
+            n--; 
+        }
+
+        return 0;
+        
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/infixToSuffix.cpp">code link</a>)</p>
+
+
+### Codility screenshots
+
+<div>
+<img src="./ejercicios_21-10-2021/Capturas/InfixtoSuffix.JPG" width="1000">
+</div>
 
 
 ### StoneWall
@@ -83,7 +223,6 @@
 <img src="./ejercicios_21-10-2021/Capturas/StoneWall1.JPG" width="1000">
 <img src="./ejercicios_21-10-2021/Capturas/StoneWall2.JPG" width="1000">
 </div>
-
 
 
 ### Nesting
