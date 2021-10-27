@@ -22,6 +22,255 @@
 
 # Programación Competitiva
 
+## Ejercicios_21-10-2021
+
+
+
+
+### StoneWall
+
+* Complejidad O(n)
+  ```cpp
+   #include <bits/stdc++.h>
+    using namespace std;
+
+    int stoneWall(vector<int>& H){
+        stack<int> height;
+        int cntBlock = 0;
+        
+        for (size_t i = 0; i < H.size(); i++)
+        {
+            while (!height.empty() && height.top()>H[i] ) height.pop();
+            if (height.empty())
+            {
+                cntBlock++;
+                height.push(H[i]);
+            }
+            else if(height.top() == H[i]){;}
+            else if(height.top() < H[i]){
+                cntBlock++;
+                height.push(H[i]);
+            }
+        }
+        return cntBlock;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n;    
+        cin>>n;
+        vector<int> H(n);
+
+        for (size_t i = 0; i < n; i++) cin>>H[i];
+        
+        // for(auto x : H) cout<<x<<" ";
+
+        cout<<stoneWall(H)<<"\n";
+        return 0;
+        
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/StoneWall.cpp">code link</a>)</p>
+
+
+### Codility screenshots
+
+<div>
+<img src="./ejercicios_21-10-2021/Capturas/StoneWall1.JPG" width="1000">
+<img src="./ejercicios_21-10-2021/Capturas/StoneWall2.JPG" width="1000">
+</div>
+
+
+
+### Nesting
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int nesting(string& S){
+        stack<int> parenth;
+        char ch;
+        for (size_t i = 0; i < S.size(); i++)
+        {
+            ch = S[i];
+            if (ch == '(') parenth.push('(');
+            else
+            {
+                if(parenth.empty() || parenth.top() != '(') return 0;
+                else parenth.pop();
+            }
+        }
+        return parenth.size() > 0 ? 0 : 1;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        string text;
+        getline(cin, text);
+
+        cout<<nesting(text)<<"\n";
+        return 0;
+        
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/Nesting.cpp">code link</a>)</p>
+
+
+### Codility screenshots
+
+<div>
+<img src="./ejercicios_21-10-2021/Capturas/nesting1.JPG" width="1000">
+<img src="./ejercicios_21-10-2021/Capturas/nesting2.JPG" width="1000">
+</div>
+
+
+### Fish
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+    int fish(vector<int>& A,vector<int>& B){
+        if (A.size() == 0) return 0;
+        
+        stack<int> fishDepretator;
+        int fishLive = A.size();
+        for (size_t i = 0; i < A.size(); i++)
+        {
+            if(B[i] == 1){
+                fishDepretator.push(A[i]);
+            }
+            else //B[i] == 0
+            {
+                while (!fishDepretator.empty())
+                {
+                    if (fishDepretator.top() > A[i])
+                    {
+                        fishLive--;
+                        break;
+                    }else if (fishDepretator.top()<A[i]){
+                        fishLive--;
+                        fishDepretator.pop();
+                    }
+                    
+                }
+                
+            }
+        }
+        return fishLive;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        int n;
+        cin>>n;
+        vector<int> A(n);
+        vector<int> B(n);
+        for (size_t i = 0; i < n; i++) cin>>A[i];
+        for (size_t i = 0; i < n; i++) cin>>B[i];
+        
+        cout<<fish(A,B)<<"\n";
+        return 0;
+        
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/Fish.cpp">code link</a>)</p>
+
+
+### Codility screenshots
+
+<div>
+<img src="./ejercicios_21-10-2021/Capturas/fish1.JPG" width="1000">
+<img src="./ejercicios_21-10-2021/Capturas/fish2.JPG" width="1000">
+</div>
+
+
+### Brackets
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int brackets(string& S){
+        
+        stack<int> N_oper;
+        char ch;
+        if (S.empty()) return 1;
+
+        for (size_t i = 0; i < S.size(); i++)
+        { 
+            switch (S[i]){
+                case '(':
+                    N_oper.push(')');
+                    break;
+                case '[':
+                    N_oper.push(']');
+                    break;
+                case '{':
+                    N_oper.push('}');
+                    break;
+                default:
+                    if (N_oper.empty()) return 0;
+                    else
+                    {
+                        ch = S[i];
+                        if (ch != N_oper.top()) return 0;
+                        N_oper.pop();
+                    }
+                    break;
+            }
+        }
+
+        return N_oper.size() > 0 ? 0 : 1;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
+        // int n;
+        // cin>>n;
+
+        string text;
+        getline(cin, text);
+
+        // cout<<text<<"\n";
+        
+        cout<<brackets(text)<<"\n";
+        return 0;
+        
+    }
+
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_21-10-2021/brackets.cpp">code link</a>)</p>
+
+
+### Codility screenshots
+
+<div>
+<img src="./ejercicios_21-10-2021/Capturas/brackets1.JPG" width="1000">
+<img src="./ejercicios_21-10-2021/Capturas/brackets2.JPG" width="1000">
+</div>
+
+
 ## Ejercicios_20-10-2021
 
 ### Evaluate Reverse Polish Notation
