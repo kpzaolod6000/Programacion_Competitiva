@@ -26,7 +26,7 @@
 
 ### Merge k Sorted Lists
 
-* Complejidad O(n)
+* Complejidad O(n^2)
   ```cpp
     #include <bits/stdc++.h>
     using namespace std;
