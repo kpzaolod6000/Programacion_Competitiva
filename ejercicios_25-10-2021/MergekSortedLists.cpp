@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
-
 priority_queue<int, vector<int>, greater<int>> MergekSortedLists(list<list<int>>& list_){
     
     priority_queue<int, vector<int>, greater<int>> ordered;

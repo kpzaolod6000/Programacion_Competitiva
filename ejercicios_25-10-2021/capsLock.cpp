@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-//con @ se altera la entrada
 using namespace std;
 
 string CapsLock(string text) {
