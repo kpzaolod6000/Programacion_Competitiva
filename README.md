@@ -22,8 +22,239 @@
 
 # Programación Competitiva
 
-## Ejercicios_21-10-2021
+## Ejercicios_25-10-2021
 
+### Merge k Sorted Lists
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    priority_queue<int, vector<int>, greater<int>> MergekSortedLists(list<list<int>>& list_){
+        
+        priority_queue<int, vector<int>, greater<int>> ordered;
+
+        for (auto sub : list_)
+        {
+            for(auto x : sub){
+                ordered.push(x);
+            }
+        }
+        return ordered;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n, m, num;
+        cin>>n;
+
+        list<list<int>> list_;
+        list<int> sublist;
+        
+    
+        for (int i = 0; i < n; i++) {
+    
+            // number of elements in list
+            cin>>m;
+            for (int j = 0; j < m; j++) {
+                cin>>num;
+                sublist.push_back(num);
+            }
+    
+    
+            list_.push_back(sublist);
+    
+            // delete all elements from single_list
+            sublist.erase(sublist.begin(),
+                            sublist.end());
+        }
+        priority_queue<int, vector<int>, greater<int>> ordered = MergekSortedLists(list_);
+
+        while (!ordered.empty())
+        {
+            cout<<ordered.top()<<" ";
+            ordered.pop();
+        }
+        cout<<"\n";
+
+        return 0;
+        
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_25-10-2021/MergekSortedLists.cpp">code link</a>)</p>
+
+
+### interviewWait
+
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int interviewWait(vector<int>& timeWait) {
+        deque<char> timeW;
+        int left,right;
+        for(int i = 0; i < timeWait.size(); i++) timeW.push_back(timeWait[i]);
+        int interTime = 0;
+
+        for (size_t i = 0; i < timeW.size(); i++)
+        {
+            left = timeW.front();
+            right = timeW.back();
+            int minTime = min(left,right);
+            if (minTime != -1)
+            {
+                if (minTime == left) timeW.pop_front();
+                else if (minTime == right) timeW.pop_back();
+                interTime += minTime;
+            }else return interTime;
+        }
+        
+        return interTime;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n;
+        cin>>n;
+        vector<int> timeWait(n);
+        for (int i = 0; i < n; i++) cin>>timeWait[i];
+        cout<<interviewWait(timeWait)<<"\n";
+
+        return 0;
+        
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_25-10-2021/interviewWait.cpp">code link</a>)</p>
+
+
+
+### Backspace
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    deque<char> Backspace(string& S) {
+        deque<char> t;
+        char ch;
+
+        for (size_t i = 0; i < S.size(); i++)
+        {
+            ch = S[i];
+            if (ch != '#')
+            {
+                t.push_back(ch);
+            }else{
+                t.pop_back();
+            }
+            
+        }
+
+        return t;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        string text = "abc#de##f#ghi#jklmn#op#";
+        
+        
+        deque<char> mydeque= Backspace(text);
+        while (!mydeque.empty())
+        {
+            cout << mydeque.front();
+            mydeque.pop_front();
+        }
+        cout<<"\n";
+        return 0;
+        
+    }
+
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_25-10-2021/Backspace.cpp">code link</a>)</p>
+
+
+
+### CapsLock
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    string CapsLock(string text) {
+        string result = "";
+        queue<char> buffer;
+        bool isEnable = false;
+        for (size_t i = 0; i < text.size(); i++)
+        {
+            if (text[i] == '$')
+            {
+                while (!buffer.empty())
+                {
+                    result += buffer.front();
+                    buffer.pop();
+                }
+                
+            }else if (text[i] == '@'){
+
+                for (size_t x = 0; x < text.size(); x++)
+                {
+                    buffer.push(toupper(buffer.front()));
+                    buffer.pop();
+                }
+                
+                isEnable = isEnable == true ? false : true;
+            }else{
+                if (isEnable) buffer.push(toupper(text[i]));
+                else buffer.push(text[i]);
+            }
+            
+        }
+        
+
+
+        return result;
+    }
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        string text;
+        cin>>text;
+        
+        
+        // for(auto x : H) cout<<x<<" ";
+        cout<<CapsLock(text)<<"\n";
+        return 0;
+        
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_25-10-2021/capsLock.cpp">code link</a>)</p>
+
+
+
+## Ejercicios_21-10-2021
 
 ### Height
 
