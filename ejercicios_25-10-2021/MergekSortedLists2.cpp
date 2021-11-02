@@ -14,17 +14,21 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
 
     priority_queue<int,vector<int>, greater<int>> ordered; 
 
+    if(lists.size() == 0) return nullptr;
     
     for(auto i : lists){
         ListNode* iter = i;
+        if(iter==nullptr) continue;
         while (iter != nullptr)
         {
             ordered.push(iter->val);
             iter = iter->next;
         }
     }
-    
-    ListNode* list_ = new ListNode(ordered.top());
+    if(ordered.size() == 0) return nullptr;
+
+    ListNode* list_ = new ListNode();
+    list_->val = ordered.top();
     ordered.pop();
 
     ListNode* aux = list_;
@@ -33,6 +37,7 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
         ListNode* nxt = new ListNode();
         nxt->val = ordered.top();
         aux->next = nxt;
+        aux = aux->next;
         ordered.pop();
 
     }
@@ -52,23 +57,35 @@ int main ()
     
     for (size_t i = 0; i < n; i++)
     {
-        cin>>m;
-        ListNode *init = new ListNode();
+        cin>>m;        
+        ListNode *init= new ListNode();
+        cin>>num;
+        init->val = num;
+
         ListNode* aux = init;
-        for (size_t j = 0; j < m; j++)
+        
+        for (size_t j = 0; j < m-1; j++)
         {
-            ListNode *newNode = new ListNode();
             cin>>num;
+            ListNode *newNode = new ListNode();
             newNode->val = num;
-            aux = newNode;
+            aux->next = newNode;
             aux = aux->next;
         }
         list_.push_back(init);
     }
-    
+    // for(auto i : list_){
+    //     ListNode* iter = i;
+    //     while (iter != nullptr)
+    //     {
+    //         cout<<iter->val<<" ";
+    //         iter = iter->next;
+    //     }
+    //     cout<<"\n";
+    // }
     ListNode* odr = mergeKLists(list_);
 
-    while (odr != nullptr)
+    while (odr)
     {
         cout<<odr->val<<" ";
         odr = odr->next;
