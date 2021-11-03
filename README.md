@@ -22,6 +22,477 @@
 
 # Programación Competitiva
 
+## Ejercicios_27-10-2021
+
+### Interview Queue
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+
+    using namespace std;
+
+    int main(){
+
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n;
+        cin>>n;
+        vector<int> nums(n);
+        for (size_t i = 0; i < n; i++) cin>>nums[i];
+
+        // *************
+        vector<vector<int>> result_leaves;
+        int g = 0;
+        queue<int> leaves;
+        vector<int> stay;
+        vector<int> aux;
+
+        bool isequal = false;
+        while (nums.size() != 1 && isequal == false)
+        {
+            stay.clear();
+            aux.clear();
+            
+            int prev = nums[0];
+            for (size_t i = 1; i < nums.size(); i++)
+            {
+                if (prev != nums[i]){
+                    isequal = false;
+                    break;
+                }else{
+                    isequal = true;
+                }
+                prev = nums[i];
+            }
+            
+            if (isequal){
+                result_leaves.push_back(nums);
+                break;
+            }
+            
+            for (size_t i = 0; i < nums.size(); i++)
+            {
+                
+                if (i == 0)
+                {
+                    if (nums[i] < nums[i+1])
+                    {
+                        leaves.push(nums[i]);
+                        // cout<< nums[i]<<" ";
+                    }else
+                    {
+                        stay.push_back(nums[i]);    
+                    }
+                    
+                }else if ( i == nums.size() - 1){
+                    
+                    if (nums[i] < nums[i-1])
+                    {
+                        leaves.push(nums[i]);
+                        // cout<< nums[i]<<" ";
+                    }else
+                    {
+                        stay.push_back(nums[i]);    
+                    }
+                }else{
+                    if (nums[i] < nums[i+1] || nums[i] < nums[i-1] )
+                    {
+                        leaves.push(nums[i]);
+                        // cout<<nums[i]<<" ";
+                    }else{
+                        stay.push_back(nums[i]);
+                    }
+                    
+                }
+                
+            }
+            
+            while(!leaves.empty()){
+                aux.push_back(leaves.front());
+                leaves.pop();
+            }
+            result_leaves.push_back(aux);
+            nums = stay;
+            g++;
+        }
+        // *************
+        // InterviewQueue(arr);
+
+
+        cout<<g<<"\n";
+        if (nums.size() == 1)
+        {
+            result_leaves.push_back(nums);
+        }
+        
+
+        for(auto arr : result_leaves){
+            for(auto x : arr) {
+                cout<<x<<" ";
+            }
+            cout<<"\n";
+        }
+        return 0;
+    }
+
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_27-10-2021/InterviewQueue.cpp">code link</a>)</p>
+
+
+### Open Kattis screenshots
+
+<div>
+<img src="./ejercicios_27-10-2021/Capturas/InterviewQueue.JPG" width="1000">
+</div>
+
+
+### Kth Largest Element in an Array
+
+* Complejidad O(n)
+  ```cpp
+  #include <bits/stdc++.h>
+
+    using namespace std;
+
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int> sorted;
+
+        for (size_t i = 0; i < nums.size(); i++) sorted.push(nums[i]);
+        
+        for (size_t i = 1; i < k; i++)
+        {
+            sorted.pop();
+        }
+        return sorted.top();
+    }
+    int main(){
+
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n,k;
+        cin>>n>>k;
+        vector<int> arr(n);
+        for (size_t i = 0; i < n; i++) cin>>arr[i];
+        cout<<findKthLargest(arr,k)<<"\n";
+
+        return 0;
+    }
+
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_27-10-2021/KthLargestElementinanArray.cpp">code link</a>)</p>
+
+
+### Leet Code screenshots
+
+<div>
+<img src="./ejercicios_27-10-2021/Capturas/khtelemlasgetsarray.JPG" width="1000">
+</div>
+
+
+### Teque
+
+* Complejidad O(n)
+  ```cpp
+   #include <bits/stdc++.h>
+
+    using namespace std;
+
+    deque<int> left;
+    deque<int> right;
+
+    void updateDeques(){
+        
+        int diff = ::left.size() - ::right.size();
+        if (diff < 0) {//if  right is larger than left
+            double d = (double)diff / -2;
+            for (size_t i = 0; i < ceil(d); i++) {
+                ::left.push_back(::right.front());
+                ::right.pop_front();
+            }
+        }
+        else if (diff > 1) {//if  left is larger than right
+            double d = (double)diff / 2;
+            for (size_t i = 0; i < floor(d); i++) {
+                ::right.push_front(::left.back());
+                ::left.pop_back();
+            }
+        }
+    }
+
+    int main(){
+
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int queries,val;
+        cin>>queries;
+        string text;  
+
+        for (size_t i = 0; i < queries; i++)
+        {
+            cin>>text;
+            cin>>val;
+            if(text == "push_back"){
+                ::right.push_back(val);
+                updateDeques();
+            }else if(text == "push_front"){
+                ::left.push_front(val);
+                updateDeques();
+            }else if(text == "push_middle"){
+                ::left.push_back(val);
+                updateDeques();
+            }else if(text == "get"){
+                if (::left.size() > val){
+                    cout << ::left[val] << "\n";
+                }
+                else{
+                    cout << ::right[val - ::left.size()] << "\n";
+                }
+            }
+
+        }
+        return 0;
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_27-10-2021/teque.cpp">code link</a>)</p>
+
+
+### Open Kattis screenshots
+
+<div>
+<img src="./ejercicios_27-10-2021/Capturas/teque.JPG" width="1000">
+</div>
+
+
+### Integer Lists
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    void integerList(string text, vector<int> arr){//stack and queue
+
+        stack<int> elem_inv1;
+        deque<int> elem_inv2;
+
+        if (text.size()>arr.size()) {
+            cout<<"error"<<endl;
+            return ;
+        }
+        for (size_t i = 0; i < arr.size(); i++) elem_inv2.push_back(arr[i]);
+        
+        string isStoreIn= "deque";
+
+
+        for (size_t i = 0; i < text.size(); i++)
+        {
+            
+            if (text[i] == 'R')
+            {   
+                if (isStoreIn == "stack"){
+                    while (!elem_inv1.empty())
+                    {
+                        elem_inv2.push_front(elem_inv1.top());
+                        elem_inv1.pop();
+                    }
+                    
+                    isStoreIn = "deque";
+
+                }else if(isStoreIn == "deque")
+                {   
+                    while (!elem_inv2.empty())
+                    {
+                        elem_inv1.push(elem_inv2.front());
+                        elem_inv2.pop_front();
+                    }
+                    isStoreIn = "stack";
+                }
+                
+                
+            }else if (text[i] == 'D')
+            {
+            
+                if (isStoreIn == "stack"){
+                    elem_inv1.pop();
+                    
+                }else if(isStoreIn == "deque")
+                {
+                    elem_inv2.pop_front();
+                } 
+            }  
+        
+        }
+        // string result = "[";
+        if (!elem_inv1.empty())
+        {
+            while (!elem_inv1.empty())
+            {    
+                cout<<elem_inv1.top()<<" ";
+                elem_inv1.pop();
+            }
+        }else if(!elem_inv2.empty())
+        {
+            while (!elem_inv2.empty())
+            {
+                cout<<elem_inv2.front()<<" ";
+                elem_inv2.pop_front();
+            }
+        }
+        cout<<endl;
+    
+    }
+    int main(){
+
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int q,val,n;
+        cin>>q;
+        
+        while (q--)
+        {
+            
+            string text;
+            cin>>text;
+            cin>>n;
+            vector<int> arr(n);
+            for (size_t i = 0; i < n; i++) cin>>arr[i];
+
+            integerList(text, arr);
+        
+        }
+        return 0;
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_27-10-2021/IntegerList.cpp">code link</a>)</p>
+
+
+### Open Kattis screenshots
+
+<div>
+<img src="./ejercicios_27-10-2021/Capturas/integerlist.JPG" width="1000">
+</div>
+
+### Merge k Sorted Lists
+
+
+* Complejidad O(n^2)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+    struct ListNode {
+        int val;
+        ListNode *next;
+        ListNode() : val(0), next(nullptr) {}
+        ListNode(int x) : val(x), next(nullptr) {}
+        ListNode(int x, ListNode *next) : val(x), next(next) {}
+        
+    };
+
+
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+
+        priority_queue<int,vector<int>, greater<int>> ordered; 
+
+        if(lists.size() == 0) return nullptr;
+        
+        for(auto i : lists){
+            ListNode* iter = i;
+            if(iter==nullptr) continue;
+            while (iter != nullptr)
+            {
+                ordered.push(iter->val);
+                iter = iter->next;
+            }
+        }
+        if(ordered.size() == 0) return nullptr;
+
+        ListNode* list_ = new ListNode();
+        list_->val = ordered.top();
+        ordered.pop();
+
+        ListNode* aux = list_;
+        while (!ordered.empty())
+        {
+            ListNode* nxt = new ListNode();
+            nxt->val = ordered.top();
+            aux->next = nxt;
+            aux = aux->next;
+            ordered.pop();
+
+        }
+        return list_;
+    }
+
+
+    int main ()
+    {   
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n, m, num;
+        cin>>n;
+
+        vector<ListNode*> list_;
+        
+        for (size_t i = 0; i < n; i++)
+        {
+            cin>>m;        
+            ListNode *init= new ListNode();
+            cin>>num;
+            init->val = num;
+
+            ListNode* aux = init;
+            
+            for (size_t j = 0; j < m-1; j++)
+            {
+                cin>>num;
+                ListNode *newNode = new ListNode();
+                newNode->val = num;
+                aux->next = newNode;
+                aux = aux->next;
+            }
+            list_.push_back(init);
+        }
+        
+        ListNode* odr = mergeKLists(list_);
+
+        while (odr)
+        {
+            cout<<odr->val<<" ";
+            odr = odr->next;
+        }
+        
+
+        return 0;
+        
+    }
+
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_25-10-2021/MergekSortedLists2.cpp">code link</a>)</p>
+
+
+### Leet Code screenshots
+
+<div>
+<img src="./ejercicios_27-10-2021/Capturas/mergeKlist.JPG" width="1000">
+</div>
+
+
 ## Ejercicios_25-10-2021
 
 ### Merge k Sorted Lists
