@@ -2,13 +2,15 @@
 
 using namespace std;
 
-int integerList(string text, vector<int> arr){//stack and queue
+void integerList(string text, vector<int> arr){//stack and queue
 
     stack<int> elem_inv1;
     deque<int> elem_inv2;
 
-    if (text.size()>arr.size()) return 0;
-
+    if (text.size()>arr.size()) {
+        cout<<"error"<<endl;
+        return ;
+    }
     for (size_t i = 0; i < arr.size(); i++) elem_inv2.push_back(arr[i]);
     
     string isStoreIn= "deque";
@@ -52,26 +54,29 @@ int integerList(string text, vector<int> arr){//stack and queue
         }  
        
     }
-    string result = "[";
+    // string result = "[";
     if (!elem_inv1.empty())
     {
         while (!elem_inv1.empty())
         {    
-            result += to_string(elem_inv1.top()) + ",";
+            // result += to_string(elem_inv1.top()) + ",";
+            cout<<elem_inv1.top()<<" ";
             elem_inv1.pop();
         }
     }else if(!elem_inv2.empty())
     {
         while (!elem_inv2.empty())
         {
-            result += to_string(elem_inv2.front()) + ",";
+            // result += to_string(elem_inv2.front()) + ",";
+            cout<<elem_inv2.front()<<" ";
             elem_inv2.pop_front();
         }
     }
-    result = result.substr (0,result.size ()-1);
-    result += "]";
-    cout<<result<<"\n";
-    return 1;
+    cout<<endl;
+    // result = result.substr (0,result.size ()-1);
+    // result += "]";
+    // cout<<result<<"\n";
+    // return 1;
 
 }
 
@@ -132,13 +137,9 @@ int main(){
         cin>>n;
         vector<int> arr(n);
         for (size_t i = 0; i < n; i++) cin>>arr[i];
-        
-        // cout<<text<<"\n";
-        int isT =integerList(text, arr);
-        if (isT == 0)
-        {
-            cout<<"error\n";
-        }
+
+        integerList(text, arr);
+      
     }
     return 0;
 }
