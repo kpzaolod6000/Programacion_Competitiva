@@ -22,6 +22,332 @@
 
 # Programación Competitiva
 
+
+## Ejercicios_03-11-2021
+
+
+
+### Island
+* Complejidad O(n^2)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+
+
+    vector<vector<int>> visited;
+    int calculateArea(vector<vector<char>>& grid , int i,int j){ 
+
+        if (i < 0 || i >= grid.size() || j < 0 || j >= grid[0].size() || grid[i][j] == 'W' || visited[i][j] == 1){
+            return 0;
+        }
+
+        visited[i][j] = 1;
+        return (1 + calculateArea(grid,i+1,j) + calculateArea(grid,i-1, j) + calculateArea(grid,i, j-1) + calculateArea(grid,i, j+1));
+
+    }
+
+    int Island(vector<vector<char>>& grid){
+
+        int m = grid.size();
+        int n = grid[0].size();
+        int cntIsland = 0;
+        bool hasEarth = false;
+
+        for (size_t i = 0; i < m; i++)
+        {
+            for (size_t j = 0; j < n; j++)
+            {
+                if (grid[i][j] == 'L')
+                {
+                    hasEarth = true;
+                    if (calculateArea(grid,i,j) != 0)
+                    {
+                        for (size_t i = 0; i < visited.size(); i++)
+                        {
+                            for (size_t j = 0; j < visited[i].size(); j++)
+                            {
+                                cout<<visited[i][j]<<" ";
+                            }
+                            cout<<"\n";
+                        }
+
+                        cntIsland++;
+                    }
+                }
+
+            }
+
+        }
+        return hasEarth ? cntIsland : 0;
+
+    }
+
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n,m;
+        cin>>n>>m;
+
+        vector<vector<char>> grid;
+        grid.resize(n, vector<char>(m,' '));
+
+        for (size_t i = 0; i < n; i++)
+        {
+            for (size_t j = 0; j < m; j++)
+            {
+                cin>>grid[i][j];
+            }
+            
+        }
+        visited.resize(n, vector<int>(m, 0));
+        cout<<Island(grid)<<"\n";
+        return 0;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_03-11-2021/Island.cpp">code link</a>)</p>
+
+
+### Open Kattis screenshots
+
+<div>
+<img src="./ejercicios_03-11-2021/Capturas/island.JPG" width="1000">
+</div>
+
+
+### Making A Large Island2
+* Complejidad O(n^2)
+  ```cpp
+  #include <bits/stdc++.h>
+    using namespace std;
+
+
+
+    vector<vector<int>> visited;
+    int calculateArea(vector<vector<int>>& visited,vector<vector<int>>& grid , int i,int j){ 
+
+        if (i < 0 || i >= grid.size() || j < 0 || j >= grid[0].size() || grid[i][j] == 0 || visited[i][j] == 1){
+            return 0;
+        }
+
+        visited[i][j] = 1;
+        return (1 + calculateArea(visited,grid,i+1,j) + calculateArea(visited,grid,i-1, j) + calculateArea(visited,grid,i, j-1) + calculateArea(visited,grid,i, j+1));
+
+    }
+
+    int largestIsland(vector<vector<int>>& grid){
+
+        int m = grid.size();
+        int n = grid[0].size();
+        int maxArea = 0;
+        bool hasZero = false;
+
+        for (size_t i = 0; i < m; i++)
+        {
+            for (size_t j = 0; j < n; j++)
+            {
+                if (grid[i][j] == 0)
+                {
+                    grid[i][j] = 1;
+                    hasZero = true;
+                    vector<vector<int>> visited;
+                    visited.resize(grid.size(), vector<int>(grid[0].size(), 0));
+                    maxArea = max(maxArea, calculateArea(visited,grid,i,j));
+                    grid[i][j] = 0;
+                }
+
+            }
+
+        }
+        return hasZero ? maxArea : m*n;
+
+    }
+
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+
+        vector<vector<int>> grid_ = {   {0,0,0,0,0,0,0},
+                                        {0,1,1,1,1,0,0},
+                                        {0,1,0,0,1,0,0},
+                                        {1,0,1,0,1,0,0},
+                                        {0,1,0,0,1,0,0},
+                                        {0,1,0,0,1,0,0},
+                                        {0,1,1,1,1,0,0}};
+
+        
+        cout<<largestIsland(grid_)<<"\n";
+        return 0;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_03-11-2021/MakingALargeIsland2.cpp">code link</a>)</p>
+
+
+### Leet Code screenshots
+
+<div>
+<img src="./ejercicios_03-11-2021/Capturas/makingalargedisland.JPG" width="1000">
+</div>
+
+
+
+### Flood Fill
+
+* Complejidad O(n)
+  ```cpp
+   #include <bits/stdc++.h>
+    using namespace std;
+
+
+    vector<vector<int>> visited;
+    
+
+    void floodNeighbors(vector<vector<int>>& image ,int x,int y,int color,int tmp){ 
+        
+        if (x < 0 || x >= image.size() || y < 0 || y >= image[0].size() || image[x][y] != tmp || visited[x][y] == 1){
+            return ;
+        }
+            
+        image[x][y] = color;
+        visited[x][y] = 1;
+        floodNeighbors(image,x+1,y,color,tmp);
+        floodNeighbors(image,x-1,y,color,tmp);
+        floodNeighbors(image,x,y+1,color,tmp);
+        floodNeighbors(image,x,y-1,color,tmp);
+    }
+
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int tmp = image[sr][sc];
+        // image[sr][sc] = newColor;
+        floodNeighbors(image,sr,sc,newColor,tmp);
+        return image;
+    }
+
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+
+        // vector<vector<int>> grid_ = {   {0,0,1,1,0,0},
+        //                                 {0,0,0,0,0,0},
+        //                                 {0,0,0,0,0,0}};
+
+        vector<vector<int>> grid_ = {   {1,1,1},
+                                        {1,1,0},
+                                        {1,0,1}};
+        visited.resize(grid_.size(), vector<int>(grid_[0].size(), 0));//colocar dentro de la funcion en el leetcode OJO
+
+        
+        vector<vector<int>> image = floodFill(grid_,1,1,2);
+
+        for(auto row: image){
+            for(auto x:row){
+                cout<< x <<" ";
+            }
+            cout<<"\n";
+        }
+        return 0;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_03-11-2021/FloodFill.cpp">code link</a>)</p>
+
+
+### Leet Code screenshots
+
+<div>
+<img src="./ejercicios_03-11-2021/Capturas/floodfill.JPG" width="1000">
+</div>
+
+
+
+
+
+### Max Area of Island
+
+* Complejidad O(n)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    vector<vector<int>> visited;
+
+    int dfs(vector<vector<int>>& grid , int i,int j){ 
+        
+        if (i < 0 || i >= grid.size() || j < 0 || j >= grid[0].size() || grid[i][j] == 0 || visited[i][j] == 1){
+            return 0;
+        }
+            
+        visited[i][j] = 1;
+        return (1 + dfs(grid,i+1,j) + dfs(grid,i-1, j) + dfs(grid,i, j-1) + dfs(grid,i, j+1));
+
+    }
+
+    int maxAreaOfIsland(vector<vector<int>>& grid){
+        int m = grid.size();
+        int n = grid[0].size();
+        int maxArea = 0;
+
+        for (size_t i = 0; i < m; i++)
+        {
+            for (size_t j = 0; j < n; j++)
+            {
+                if (grid[i][j] == 1)
+                {
+                    maxArea = max(maxArea, dfs(grid,i,j));
+                    // cout<<maxArea<<"\n";
+                }
+                
+            }
+            
+        }
+        return maxArea;
+
+    }
+
+
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+
+        // vector<vector<int>> grid_ = {   {0,0,1,1,0,0},
+        //                                 {0,0,0,0,0,0},
+        //                                 {0,0,0,0,0,0}};
+
+        vector<vector<int>> grid_ = {   {0,0,1,0,0,0,0,1,0,0,0,0,0},
+                                        {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                                        {0,1,1,0,1,0,0,0,0,0,0,0,0},
+                                        {0,1,0,0,1,1,0,0,1,0,1,0,0},
+                                        {0,1,0,0,1,1,0,0,1,1,1,0,0},
+                                        {0,0,0,0,0,0,0,0,0,0,1,0,0},
+                                        {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                                        {0,0,0,0,0,0,0,1,1,0,0,0,0}};
+        visited.resize(grid_.size(), vector<int>(grid_[0].size(), 0));//colocar dentro de la funcion en el leetcode OJO
+        cout<<maxAreaOfIsland(grid_)<<"\n";
+        return 0;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_03-11-2021/maxAreaofIsland.cpp">code link</a>)</p>
+
+
+### Leet Code screenshots
+
+<div>
+<img src="./ejercicios_03-11-2021/Capturas/maxAreaofIsland.JPG" width="1000">
+</div>
+
+
+
 ## Ejercicios_27-10-2021
 
 ### Interview Queue
