@@ -23,6 +23,167 @@
 # Programación Competitiva
 
 
+
+## Ejercicios_04-11-2021
+
+### Breadth First Search
+* Complejidad O(n^2)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    void BreadthFirstSearch(vector<vector<int>>& grid,int i, int j){
+        
+        int n = grid.size();
+        int m = grid[0].size();
+        
+        
+        vector<int> posX ={-1, 0, 1, 0}; 
+        vector<int> posY ={0, -1, 0, 1};
+
+        grid[i][j] = 0;
+
+        queue<pair<int,int>> search{};
+        search.push({i,j});
+        
+        while (!search.empty()) {
+            
+            pair<int,int> current = search.front();
+            search.pop();
+            int r = current.first;
+            int c = current.second;
+
+            for (size_t k = 0; k < 4; k++) {
+                
+                int ir = r + posX[k];
+                int jc = c + posY[k];
+                
+                if ( (ir >= 0 && ir < n && jc >= 0 && jc < m) && grid[ir][jc] == -1){
+                    grid[ir][jc] = grid[r][c] + 1;
+                    search.push({ir,jc});
+                }
+            }
+        }
+        
+    }
+
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+
+        vector<vector<int>> grid_ = {   {-1,-1,-1,-1,-1},
+                                        {-1,-1,-1,-1,-1},
+                                        {-1,-1,-1,-1,-1},
+                                        {-1,-1,-1,-1,-1},
+                                        {-1,-1,-1,-1,-1}};
+
+        BreadthFirstSearch(grid_,1,2);
+
+        for (size_t i = 0; i < grid_.size(); i++)
+        {
+            for (size_t j = 0; j < grid_[0].size(); j++)
+            {
+                cout<<grid_[i][j]<<" ";
+            }
+            cout<<"\n";
+        }
+        
+        return 0;
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_04-11-2021/BreadthFirstSearch.cpp">code link</a>)</p>
+
+
+### 10 Kinds of People
+* Complejidad O(n^2)
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main()
+    {
+        int r,c;
+        cin>>r>>c;
+        
+        char map[r][c+1];
+        
+        for (int i = 0; i < r; i++) scanf("%s", map[i]);
+        
+        int total = r * c;
+        int next_group = 1;
+        int *group = (int*)calloc((size_t)total, sizeof(int));
+        short one = 1;
+
+        stack<pair<int,int>> open{};
+
+
+        int q;
+        cin>>q;
+        
+
+        while (q--)
+        {
+            short r1,c1,r2,c2;
+            cin>>r1>>c1>>r2>>c2;
+            r1--; c1--; r2--; c2--;
+            int dim_one_1 = r1 * c + c1;
+            int dim_one_2 = r2 * c + c2;
+
+            if (dim_one_1 == dim_one_2){
+                if (map[r1][c1] == '1')
+                {
+                    cout<<"decimal\n";
+                }else{
+                    cout<<"binary\n";
+                }
+                
+            }
+            else if (group[dim_one_1] == 0 && group[dim_one_2] == 0)
+            {
+                // DFS
+                open.push({r1,c1});
+                while (!open.empty())
+                {
+                    pair<int,int> current = open.top();
+                    open.pop();
+                    short curr_x = current.first;
+                    short curr_y = current.second;
+                    char curr_val = map[curr_x][curr_y];
+                    int dim_one = curr_x * c + curr_y;
+                    if (group[dim_one]) continue;
+                    group[dim_one] = next_group;
+                    if (curr_x > 0 && map[curr_x-1][curr_y] == curr_val && !group[(curr_x-1)*c+curr_y]) open.push({curr_x-one, curr_y});
+                    if (curr_x < r - 1 && map[curr_x+1][curr_y] == curr_val && !group[(curr_x+1)*c+curr_y]) open.push({curr_x+one, curr_y});
+                    if (curr_y > 0 && map[curr_x][curr_y-1] == curr_val && !group[curr_x*c+curr_y-1]) open.push({curr_x, curr_y-one});
+                    if (curr_y < c - 1 && map[curr_x][curr_y+1] == curr_val && !group[curr_x*c+curr_y+1]) open.push({curr_x, curr_y+one});
+                }
+                next_group++;
+                printf(group[dim_one_2] ? (map[r1][c1] == '1' ? "decimal\n" : "binary\n") : ("neither\n"));
+            }
+            else if (map[r1][c1] != map[r2][c2]) printf("neither\n");
+            else if (group[dim_one_1] == group[dim_one_2]) printf(map[r1][c1] == '1' ? "decimal\n" : "binary\n");
+            else printf("neither\n");
+        }
+
+        return 0;
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_04-11-2021/10KindsofPeople.cpp">code link</a>)</p>
+
+
+### Open Kattis screenshots
+
+<div>
+<img src="./ejercicios_04-11-2021/Capturas/10kindsofpeople.JPG" width="1000">
+</div>
+
+
 ## Ejercicios_03-11-2021
 
 
