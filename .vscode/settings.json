@@ -11,6 +11,14 @@
         "xstring": "cpp",
         "xutility": "cpp",
         "vector": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "algorithm": "cpp",
+        "xtree": "cpp",
+        "xlocinfo": "cpp",
+        "ostream": "cpp",
+        "compare": "cpp",
+        "xstddef": "cpp",
+        "map": "cpp",
+        "string": "cpp"
     }
 }
