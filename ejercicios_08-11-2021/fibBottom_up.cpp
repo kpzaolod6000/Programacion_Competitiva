@@ -10,13 +10,9 @@ long fib_bottomup(int n){
     F[1] = 1;
     for (size_t i = 2; i <= n; i++)
     {
-        F[i] = F[i-2] + F[i-2];
+        F[i] = F[i-2] + F[i-1];
     }
     return F[n];
-}
-long fib_memorization(int n){
-    vector<long> memo(n+1);
-    return fib(n,memo);
 }
 
 int main(int argc, char const * argv[]){
@@ -26,6 +22,6 @@ int main(int argc, char const * argv[]){
     int n;
     cin>>n;
 
-    cout<<fib(n)<<"\n";
+    cout<<fib_bottomup(n)<<"\n";
     return 0;
 }

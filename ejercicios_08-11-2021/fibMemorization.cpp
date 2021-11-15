@@ -3,8 +3,8 @@
 using namespace std;
 
 long fib(int n, vector<long>& memo){
-    if(memo[n]) return memo[n];
-    long result{}
+    if(memo[n]){/*cout <<memo[n]<<"\n";*/ return memo[n];}
+    long result{};
     if(n<=1)
         result = n;
     else
@@ -26,6 +26,6 @@ int main(int argc, char const * argv[]){
     int n;
     cin>>n;
 
-    cout<<fib(n)<<"\n";
+    cout<<fib_memorization(n)<<"\n";
     return 0;
 }
