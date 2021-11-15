@@ -10,12 +10,23 @@ int main(){
 
     int n,m;
     cin>>n>>m;
-
-    char grid[n][m+1];
+    int n_inpt = 0;
+    //char grid[n][m+1];
     
-    for (int i = 0; i < n; i++) scanf("%s", grid[i]);
+    string line;
+    vector<vector<int>> grid;
 
-    
+    while (n_inpt<n)
+    {
+        cin>>line;
+        // cout<<line<<"\n";
+        vector<int> col_(m);
+        for (size_t i = 0; i < m; i++) col_[i] = (line[i] - '0'); 
+        grid.push_back(col_);
+        n_inpt++; 
+    }
+
+
     vector<vector<int>> sum_;
     sum_.resize(n, vector<int>(m, -1));
 
@@ -39,7 +50,7 @@ int main(){
 
         for (size_t k = 0; k < 4; k++) {
             
-            int val = grid[r][c] - '0';
+            int val = grid[r][c];
             int ir = r + (val * posX[k]);
             int jc = c + (val * posY[k]);
             // cout<<ir<<" "<<jc<<"\n";
