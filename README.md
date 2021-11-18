@@ -22,6 +22,318 @@
 
 # Programación Competitiva
 
+## Ejercicios_15-11-2021
+
+* LCS Bottom Up
+  ```cpp     
+    int LCS_bottomup(string& P,string& Q){
+    int m = P.size();
+    int n = Q.size();
+    vector<vector<int>> memo(m+1,vector<int>(n+1,0));
+    
+    
+    for (size_t i = 0; i <= m; i++)
+    {
+        for (size_t j = 0; j <= n; j++)
+        {
+            if (i == 0 || j == 0)
+            {
+                memo[i][j] = 0;
+            }
+            else if(P[i-1] == Q[j-1]){
+                // cout<<str1<<" "<<str2<<"\n";
+                memo[i][j] = 1 + memo[i-1][j-1];
+            }else{
+                int a = memo[i-1][j];
+                int b = memo[i][j-1];
+                memo[i][j] = max(a,b);
+            }
+        }
+        
+    }
+    return memo[m][n];
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_15-11-2021/LongestCommonSubsequence.cpp">code link</a>)</p>
+
+* LCS Memorization
+  ```cpp
+        
+    int LCS_memo(string& P,string& Q,int m, int n, vector<vector<int>>& memo){
+        
+        int result ;
+        if (m == 0 || n == 0)
+        {
+            result = 0;
+        }
+        else if (memo[m][n])
+        {
+            result = memo[m][n];
+        }
+        
+        else if(P[m-1] == Q[n-1]){
+            // cout<<str1<<" "<<str2<<"\n";
+            result = 1 + LCS_memo(P,Q,m-1,n-1, memo);
+        }else{
+            int a = LCS_memo(P,Q,m-1,n, memo);
+            int b = LCS_memo(P,Q,m,n-1, memo);
+            result = max(a,b);
+        }
+        return result;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_15-11-2021/LongestCommonSubsequence.cpp">code link</a>)</p>
+
+
+* LCS Recursive
+  ```cpp
+    int LCS_fib(string P,string Q){
+        int result ;
+
+        string strP = P.substr(0,P.size()-1);
+        string strQ = Q.substr(0,Q.size()-1);
+        if (P.size() == 0 || Q.size() == 0)
+        {
+            // cout<<P;
+            result = 0;
+        }
+        
+        else if(P[P.size()-1] == Q[Q.size()-1]){
+            // cout<<str1<<" "<<str2<<"\n";
+            result = 1 + LCS_fib(strP,strQ);
+        }else{
+            int a = LCS_fib(strP,Q);
+            int b = LCS_fib(P,strQ);
+            result = max(a,b);
+        }
+        return result;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_15-11-2021/LongestCommonSubsequence.cpp">code link</a>)</p>
+
+
+## Ejercicios_08-11-2021
+
+* Knapsack BottomUp
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int knapsack_Bottomup(int n,int C,vector<int>& weight,vector<int>& value){
+        
+        int default_value = 0;
+        vector<int> col_(C+1,default_value);
+        vector<vector<int>> memo(n+1,col_);
+
+        for (size_t i = 1; i <= n; i++)
+        {
+            for (size_t j = 1; j <= C; j++)
+            {
+                if(weight[i] > j){
+                    memo[i][j] = memo[i-1][j];
+                }else
+                {
+                    int temp1 = memo[i-1][j];
+                    int temp2 = value[i] + memo[i-1][j-weight[i]];
+                    memo[i][j]= max(temp1,temp2);
+                }
+                
+            }
+            
+        }
+        return memo[n][C];
+        
+    }
+
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n,C;
+        cin>>n>>C;
+
+        vector<int> weight(n+1);
+        weight[0] = 0;
+        for (size_t i = 1; i < n+1; i++) cin>>weight[i];
+        
+        vector<int> value(n);
+        value[0] = 0;
+        for (size_t i = 1; i < n+1; i++) cin>>value[i];
+        
+
+        cout<<knapsack_Bottomup(n,C,weight,value)<<"\n";
+        return 0;
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_08-11-2021/knapsackBottomUp.cpp">code link</a>)</p>
+
+
+* Knapsack Memorization
+  ```cpp
+    #include <bits/stdc++.h>
+    using namespace std;
+
+
+
+    int knapsack(int n,int C,vector<int>& weight,vector<int>& value,vector<vector<int>>& memo){
+
+        int result;
+        if (memo[n][C])
+        {
+            result = memo[n][C];
+        }
+        
+        if(n == 0 || C == 0){
+            //caso base
+            result = 0;
+        }
+        else if(weight[n] > C){
+            result = knapsack(n-1,C,weight,value,memo);
+        }else
+        {
+            int temp1 = knapsack(n-1,C,weight,value,memo);
+            int temp2 = value[n]+knapsack(n-1,C-weight[n],weight,value,memo);
+
+            result = max(temp1,temp2);
+        }
+        memo[n][C] = result;
+        return result;
+    }
+
+    int knapsack_Memorization(int n,int C,vector<int>& weight,vector<int>& value){
+        
+        int default_value = 0;
+        vector<int> col_(C+1,default_value);
+        vector<vector<int>> memo(n+1,col_);
+
+
+        return knapsack(n,C,weight,value,memo);
+        
+
+    }
+
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n,C;
+        cin>>n>>C;
+
+        vector<int> weight(n+1);
+        weight[0] = 0;
+        for (size_t i = 1; i < n+1; i++) cin>>weight[i];
+        
+        vector<int> value(n);
+        value[0] = 0;
+        for (size_t i = 1; i < n+1; i++) cin>>value[i];
+
+        cout<<knapsack_Memorization(n,C,weight,value)<<"\n";
+        return 0;
+    }
+
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_08-11-2021/knapsackMemorization.cpp">code link</a>)</p>
+
+
+* Knapsack Recursive
+  ```cpp
+   
+    #include <bits/stdc++.h>
+    using namespace std;
+
+
+    int knapsack(int n,int C,vector<int>& weight,vector<int>& value){
+
+        int result;
+        if(n == 0 || C == 0){
+            //caso base
+            result = 0;
+        }
+        else if(weight[n] > C){
+            result = knapsack(n-1,C,weight,value);
+        }else
+        {
+            int temp1 = knapsack(n-1,C,weight,value);
+            int temp2 = value[n]+knapsack(n-1,C-weight[n],weight,value);
+
+            result = max(temp1,temp2);
+        }
+        return result;
+    }
+
+    int main(int argc, char const * argv[]){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+
+        int n,C;
+        cin>>n>>C;
+
+        vector<int> weight(n+1);
+        weight[0] = 0;
+        for (size_t i = 1; i < n+1; i++) cin>>weight[i];
+        
+        vector<int> value(n);
+        value[0] = 0;
+        for (size_t i = 1; i < n+1; i++) cin>>value[i];
+        
+        cout<<knapsack(n,C,weight,value)<<"\n";
+        return 0;
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_08-11-2021/knapsackRecursive.cpp">code link</a>)</p>
+
+
+* Fibonacci Memorization
+  ```cpp
+    
+    long fib(int n, vector<long>& memo){
+        if(memo[n]){/*cout <<memo[n]<<"\n";*/ return memo[n];}
+        long result{};
+        if(n<=1)
+            result = n;
+        else
+            result = fib(n-2,memo) + fib(n-1,memo);
+        memo[n] = result;
+        return result;
+    }
+
+
+    long fib_memorization(int n){
+        vector<long> memo(n+1);
+        return fib(n,memo);
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_08-11-2021/fibMemorization.cpp">code link</a>)</p>
+
+
+* Fibonacci Bottom Up
+  ```cpp
+    long fib_bottomup(int n){
+        if(n<=1)
+            return n;
+        vector<long> F(n+1);
+        F[0] = 0;
+        F[1] = 1;
+        for (size_t i = 2; i <= n; i++)
+        {
+            F[i] = F[i-2] + F[i-1];
+        }
+        return F[n];
+    }
+    ```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_08-11-2021/fibBottom_up.cpp">code link</a>)</p>
 
 
 ## Ejercicios_04-11-2021
