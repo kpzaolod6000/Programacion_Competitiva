@@ -94,12 +94,12 @@ int main ()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // vector<vector<int>> dungeon ={{-2,-3,3},
-    //                               {-5,-10,1},
-    //                               {10,30,-5}};
+    vector<vector<int>> dungeon ={{-2,-3,3},
+                                  {-5,-10,1},
+                                  {10,30,-5}};
 
 
-    vector<vector<int>> dungeon ={{-3,5}};
+    //vector<vector<int>> dungeon ={{-3,5}};
 
     cout<<calculateMinimumHP(dungeon)<<"\n";
     cout<<calculateMinimumH(dungeon)<<"\n";

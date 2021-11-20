@@ -1,21 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void ToNeighbors(vector<vector<char>>& amoebas,int i, int j,int m,int n) {
+void ToNeighbors(vector<vector<char>>& stars,int i, int j,int m,int n) {
  
     
     
     vector<int> posX ={-1, 0, 1, 0}; 
     vector<int> posY ={0, -1, 0, 1};
 
-    stack<pair<int,int>> partAme{};
-    partAme.push({i,j});
-    amoebas[i][j] = '#';
+    stack<pair<int,int>> part{};
+    part.push({i,j});
+    stars[i][j] = '#';
 
-    while (!partAme.empty()) {
+    while (!part.empty()) {
         
-        pair<int,int> current = partAme.top();
-        partAme.pop();
+        pair<int,int> current = part.top();
+        part.pop();
         int r = current.first;
         int c = current.second;
         // cout<<r<<" "<<c<<"\n";
@@ -26,10 +26,10 @@ void ToNeighbors(vector<vector<char>>& amoebas,int i, int j,int m,int n) {
             int jc = c + posY[k];
             // cout<<ir<<" "<<jc<<"\n";
             if ( ir >= 0 && ir < m && jc >= 0 && jc < n){
-                if (amoebas[ir][jc] == '-')
+                if (stars[ir][jc] == '-')
                 {
-                    partAme.push({ir,jc});
-                    amoebas[ir][jc] = '#';
+                    part.push({ir,jc});
+                    stars[ir][jc] = '#';
                 }
             }
         }
@@ -50,7 +50,7 @@ int main ()
         
         n_test++;
         string line;
-        vector<vector<char>> amoebas;
+        vector<vector<char>> stars;
 
         int n_inpt = 0;
         while (n_inpt<m)
@@ -59,7 +59,7 @@ int main ()
             // cout<<line<<"\n";
             vector<char> col_(n);
             for (size_t i = 0; i < n; i++) col_[i] = (line[i]); 
-            amoebas.push_back(col_);
+            stars.push_back(col_);
             n_inpt++; 
         }
         
@@ -68,10 +68,10 @@ int main ()
         {
             for (size_t j = 0; j < n; j++)
             {
-                if (amoebas[i][j] == '-')
+                if (stars[i][j] == '-')
                 {
                     cnt++;
-                    ToNeighbors(amoebas,i,j,m,n);
+                    ToNeighbors(stars,i,j,m,n);
                 }
                 
             }
