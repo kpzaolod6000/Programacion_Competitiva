@@ -24,6 +24,781 @@
 
 ## Ejercicios_18-11-2021 (PRACTICA CALIFICADA)
 
+
+### Coast Length
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int countCoast(vector<vector<char>>& grid,int i, int j){
+    vector<int> posX ={-1, 0, 1, 0}; 
+    vector<int> posY ={0, -1, 0, 1};
+    int sum_ = 0;
+
+    for (size_t k = 0; k < 4; k++) {
+            
+        int ir = i + posX[k];
+        int jc = j + posY[k];
+        if (grid[ir][jc] == 'M')
+        {
+            sum_++;
+        }
+        
+    }
+    return sum_;
+}
+
+int CoastLength(vector<vector<char>>& grid){
+    int m = grid.size();
+    int n = grid[0].size();
+
+    vector<int> posX ={-1, 0, 1, 0}; 
+    vector<int> posY ={0, -1, 0, 1};
+
+    
+    queue<pair<int,int>> celAdjacent{};
+    celAdjacent.push({0,0});
+
+    while (!celAdjacent.empty())
+    {
+        pair<int,int> current = celAdjacent.front();
+        celAdjacent.pop();
+        int r = current.first;
+        int c = current.second;
+        grid[r][c] = 'M';
+
+        for (size_t k = 0; k < 4; k++) {
+                
+            int ir = r + posX[k];
+            int jc = c + posY[k];
+            // cout<<ir<<" "<<jc<<"\n";
+            if (( ir >= 0 && ir < m && jc >= 0 && jc < n) && grid[ir][jc] == '0'){
+                celAdjacent.push({ir,jc});
+            }
+        }
+    }
+        
+
+    int sum_ = 0;
+
+    for (size_t i = 1; i <= m-2; i++)
+    {
+        for (size_t j = 1; j <= n-2; j++)
+        {
+            if(grid[i][j] == '1') sum_ += countCoast(grid,i,j);
+        }
+    }
+    
+
+    return sum_;
+}
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int m,n;
+    cin>>m>>n;
+
+    vector<vector<char>> grid;
+    grid.resize(m+2, vector<char>(n+2, '0'));
+
+    // Read in data
+    for(int i = 1; i <= m; i++) {
+        for(int j = 1; j <= n; j++) {
+            cin >> grid[i][j];
+        }
+    }
+
+    cout<<CoastLength(grid)<<"\n";
+    return 0;
+    
+}
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/CoastLength.cpp">code link</a>)</p>
+
+### OpenKattis screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/CoastLenght.png" width="1000">
+</div>
+
+
+### Dungeon Game
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int calculateMinimumH(vector<vector<int>>& dungeon) {
+    int m = dungeon.size();
+    int n = dungeon[0].size();
+    vector<vector<int>>gridCache (m,vector<int>(n,0));
+
+    for(int i=m-1;i>=0;i--){
+        for(int j=n-1;j>=0;j--){
+            if(i==m-1 && j==n-1)
+                gridCache[i][j] = min(0,dungeon[i][j]);
+            else if(i==m-1)
+                gridCache[i][j] = min(0,dungeon[i][j]+gridCache[i][j+1]);
+            else if(j==n-1)
+                gridCache[i][j] = min(0,dungeon[i][j]+gridCache[i+1][j]);
+            else
+                gridCache[i][j] = min(0,dungeon[i][j]+max(gridCache[i+1][j],gridCache[i][j+1]));
+        }
+    }
+    return abs(gridCache[0][0])+1;      
+}
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    vector<vector<int>> dungeon ={{-2,-3,3},
+                                  {-5,-10,1},
+                                  {10,30,-5}};
+
+
+    //vector<vector<int>> dungeon ={{-3,5}};
+    cout<<calculateMinimumH(dungeon)<<"\n";
+    
+    return 0;
+    
+}
+
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/DungeonGame.cpp">code link</a>)</p>
+
+### LeetCode screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/DungeonGame.png" width="1000">
+</div>
+
+
+### Unique Paths
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int uniquePaths(int m, int n) {
+    vector<vector<int>> mbttmup(m,vector<int> (n,0));
+    
+    for (size_t i = 0; i < m; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            if (i == 0 && j == 0) mbttmup[i][j] = 1;
+            else if( i == 0)  mbttmup[i][j] = mbttmup[i][j-1];
+            else if( j == 0)  mbttmup[i][j] = mbttmup[i-1][j];
+            else mbttmup[i][j] = mbttmup[i-1][j] + mbttmup[i][j-1];
+        }
+        
+    }
+    return mbttmup[m-1][n-1];
+
+}
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int m,n;
+
+    cin>>n>>m;
+
+
+    cout<<uniquePaths(m,n)<<"\n";
+    return 0;
+    
+}
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/UniquePaths.cpp">code link</a>)</p>
+
+### LeetCode screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/UniquePaths.png" width="1000">
+</div>
+
+
+### Pacific Atlantic Water Flow
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+        
+        
+void dfs(vector<vector<int>>& heights, int i, int j, int prev,vector<vector<bool>>& ocean){
+        
+    vector<int> posX ={0, 0, 1, -1}; 
+    vector<int> posY ={1, -1, 0, 0};
+
+    if(i < 0 || i >= ocean.size() || j < 0 || j >= ocean[0].size()) return;
+    
+    if(heights[i][j] < prev || ocean[i][j]) return;
+    ocean[i][j] = true;
+
+    for (size_t k = 0; k < 4; k++)
+    {
+        dfs(heights, i+posX[k], j+posY[k], heights[i][j], ocean);
+    }
+    
+}
+
+vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+    int n = heights.size();
+    int m = heights[0].size();
+    vector<vector<int>> output;
+    if(n == 0 && m == 0) return output;
+
+    vector<vector<bool>> pacific(n,vector<bool> (m,false));
+    vector<vector<bool>> atlantic (n,vector<bool> (m,false));
+
+
+
+    for (size_t i = 0; i < m; i++)
+    {
+        dfs(heights, 0, i, INT_MIN, pacific);
+        dfs(heights, n-1, i, INT_MIN, atlantic);
+        
+    }
+    
+
+    for (size_t i = 0; i < n; i++)
+    {
+        dfs(heights, i, 0, INT_MIN, pacific);
+        dfs(heights, i, m-1, INT_MIN, atlantic);
+    }
+    
+       
+    for(int i = 0; i < m; i++){
+        vector<int> line_;
+        int p = 0;
+        for(int j = 0; j < n; j++) {
+            if(pacific[i][j] && atlantic[i][j]) {
+                line_.push_back(i);
+                line_.push_back(j);
+            }
+        }
+        if (line_.size() > 2)
+        {
+            vector<int> pos_;
+            for (size_t l = 0; l < line_.size(); l++) 
+            {
+                pos_.push_back(line_[l]);
+                if((l+1) % 2 == 0) {
+                    output.push_back(pos_);
+                    pos_.clear();      
+                }
+            }
+            
+        }else output.push_back(line_);
+        
+        
+    }
+    
+    return output;
+}
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    vector<vector<int>> heights = {{1,2,2,3,5},
+                                   {3,2,3,4,4},
+                                   {2,4,5,3,1},
+                                   {6,7,1,4,5},
+                                   {5,1,1,2,4}};
+    //vector<vector<int>> heights = {{2,1},
+    //                               {1,2}};
+
+    vector<vector<int>> output = pacificAtlantic(heights);
+
+    for(int i = 0; i < output.size(); i++){
+        
+        for(int j = 0; j < output[i].size(); j++) {
+            cout<< output[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
+    return 0;
+    
+}
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/PacificAtlanticWaterFlow.cpp">code link</a>)</p>
+
+
+### Gregory the Grasshopper
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int GregoryinAction(int m,int n,int r,int c,int gr,int gc){
+    
+    vector<int> posX ={-1, -1, -2, -2, 1, 1, 2, 2}; 
+    vector<int> posY ={2, -2, 1, -1, 2, -2, 1, -1};
+
+    vector<vector<int>> pass_(m, vector<int>(n, 0));
+    pass_[r][c] = 1;
+    
+
+    queue<pair<int,int>> jumps{};
+    jumps.push({r,c});
+
+    while (!jumps.empty()) {
+
+        pair<int,int> current = jumps.front();
+        jumps.pop();
+        int r_i = current.first;
+        int c_i = current.second;
+        
+        int sum_;
+        if(r_i == r && c_i == c) sum_ = 0;
+        else sum_= pass_[r_i][c_i];
+
+        for (size_t k = 0; k < 8; k++) {
+                
+            int ir = r_i + posX[k];
+            int jc = c_i + posY[k];
+            // cout<<ir<<" "<<jc<<"\n";
+            if ( ir >= 0 && ir < m && jc >= 0 && jc < n){
+                if (pass_[ir][jc] == 0)
+                {
+                    pass_[ir][jc] = sum_ + 1;
+                    jumps.push({ir,jc});
+                }
+            }
+        }
+    }
+    if (pass_[gr][gc] == 0) return -1;
+    return pass_[gr][gc];
+    
+}
+
+
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int m,n,r,c,gr,gc;
+    
+    while (cin>>m && cin>>n && cin>>r && cin>>c && cin>>gr && cin>>gc)
+    {
+        int isV = GregoryinAction(m,n,r-1,c-1,gr-1,gc-1);
+        if (isV == -1) cout<<"impossible\n";
+        else cout<<isV<<"\n";
+    } 
+    
+    return 0;
+    
+}
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/GregorytheGrasshopper.cpp">code link</a>)</p>
+
+### OpenKattis screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/gregory.png" width="1000">
+</div>
+
+
+### Keys and Rooms
+
+```cpp 
+#include <bits/stdc++.h>
+using namespace std;
+
+bool canVisitAllRooms(vector<vector<int>>& rooms) {
+
+    stack<int> keys;
+    keys.push(0);
+    unordered_map<int,int> visited;
+
+    for (size_t i = 0; i < rooms.size(); i++)
+    {
+        visited[i] = 0;
+    }
+    visited[0] = 1;
+
+    while (!keys.empty())
+    {
+        int idroom = keys.top();
+        keys.pop();
+
+        vector<int> room = rooms[idroom];
+
+        for (size_t ky = 0; ky < room.size(); ky++)
+        {
+            if (visited[room[ky]] == 0)
+            {
+                visited[room[ky]] = 1;
+                keys.push(room[ky]);
+            }
+            
+        }
+    }
+
+    int all_ = 0;
+
+    for (auto x : visited)
+    {
+        if(x.second == 1) all_++;
+    }
+
+    if(all_ == rooms.size()) return true;
+    return false;
+        
+}
+
+
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    vector<vector<int>> kRooms = {{1},
+                                  {2},
+                                  {3},
+                                  {}};
+
+    cout<<canVisitAllRooms(kRooms)<<"\n";
+    
+    return 0;
+    
+}
+
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/KeysandRooms.cpp">code link</a>)</p>
+
+### LeetCode screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/keysandrooms.png" width="1000">
+</div>
+
+
+
+### Counting Stars
+
+```cpp 
+#include <bits/stdc++.h>
+using namespace std;
+
+void ToNeighbors(vector<vector<char>>& stars,int i, int j,int m,int n) {
+ 
+    
+    
+    vector<int> posX ={-1, 0, 1, 0}; 
+    vector<int> posY ={0, -1, 0, 1};
+
+    stack<pair<int,int>> part{};
+    part.push({i,j});
+    stars[i][j] = '#';
+
+    while (!part.empty()) {
+        
+        pair<int,int> current = part.top();
+        part.pop();
+        int r = current.first;
+        int c = current.second;
+        // cout<<r<<" "<<c<<"\n";
+
+        for (size_t k = 0; k < 4; k++) {
+                
+            int ir = r + posX[k];
+            int jc = c + posY[k];
+            // cout<<ir<<" "<<jc<<"\n";
+            if ( ir >= 0 && ir < m && jc >= 0 && jc < n){
+                if (stars[ir][jc] == '-')
+                {
+                    part.push({ir,jc});
+                    stars[ir][jc] = '#';
+                }
+            }
+        }
+    }
+}
+
+
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int m,n,n_test = 0;
+    
+
+    while(cin>>m && cin>>n){
+        
+        n_test++;
+        string line;
+        vector<vector<char>> stars;
+
+        int n_inpt = 0;
+        while (n_inpt<m)
+        {
+            cin>>line;
+            // cout<<line<<"\n";
+            vector<char> col_(n);
+            for (size_t i = 0; i < n; i++) col_[i] = (line[i]); 
+            stars.push_back(col_);
+            n_inpt++; 
+        }
+        
+        int cnt = 0;
+        for (size_t i = 0; i < m; i++)
+        {
+            for (size_t j = 0; j < n; j++)
+            {
+                if (stars[i][j] == '-')
+                {
+                    cnt++;
+                    ToNeighbors(stars,i,j,m,n);
+                }
+                
+            }
+            
+        }
+        cout<<"Case "<<n_test<<": "<<cnt<<"\n";
+        
+    }
+    
+    return 0;
+    
+}
+
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/CountingStars.cpp">code link</a>)</p>
+
+### OpenKattis screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/coutingstar.png" width="1000">
+</div>
+
+
+### Sheba's Amoebas
+
+
+```cpp 
+#include <bits/stdc++.h>
+using namespace std;
+
+void ToNeighbors(vector<vector<char>>& amoebas,int i, int j,int m,int n) {
+ 
+    
+    
+    vector<int> posX ={-1, 0, 1, 0, 1, -1, 1, -1}; 
+    vector<int> posY ={0, -1, 0, 1, 1, 1, -1, -1};
+
+    stack<pair<int,int>> partAme{};
+    partAme.push({i,j});
+    amoebas[i][j] = '.';
+
+    while (!partAme.empty()) {
+        
+        pair<int,int> current = partAme.top();
+        partAme.pop();
+        int r = current.first;
+        int c = current.second;
+        // cout<<r<<" "<<c<<"\n";
+
+        for (size_t k = 0; k < 8; k++) {
+                
+            int ir = r + posX[k];
+            int jc = c + posY[k];
+            // cout<<ir<<" "<<jc<<"\n";
+            if ( ir >= 0 && ir < m && jc >= 0 && jc < n){
+                if (amoebas[ir][jc] == '#')
+                {
+                    partAme.push({ir,jc});
+                    amoebas[ir][jc] = '.';
+                }
+            }
+        }
+    }
+}
+
+
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int m,n;
+    cin>>m>>n;
+
+    string line;
+    vector<vector<char>> amoebas;
+
+    int n_inpt = 0;
+    while (n_inpt<m)
+    {
+        cin>>line;
+        // cout<<line<<"\n";
+        vector<char> col_(n);
+        for (size_t i = 0; i < n; i++) col_[i] = (line[i]); 
+        amoebas.push_back(col_);
+        n_inpt++; 
+    }
+    
+    int cnt = 0;
+    for (size_t i = 0; i < m; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            if (amoebas[i][j] == '#')
+            {
+                cnt++;
+                ToNeighbors(amoebas,i,j,m,n);
+            }
+            
+        }
+        
+    }
+    cout<<cnt<<"\n";
+    return 0;
+    
+}
+
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/ShebaAmoebas.cpp">code link</a>)</p>
+
+### OpenKattis screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/amoebas.png" width="1000">
+</div>
+
+
+
+### Number of Enclaves
+
+
+```cpp 
+#include <bits/stdc++.h>
+using namespace std;
+
+int numEnclaves(vector<vector<int>>& grid) {
+ 
+    vector<int> posX ={-1, 0, 1, 0}; 
+    vector<int> posY ={0, -1, 0, 1};
+
+    
+    int m = grid.size();
+    int n = grid[0].size();
+    
+    stack<pair<int,int>> storeE{};
+    
+    
+    for (size_t i = 0; i < m; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            if (grid[i][j] == 1)
+            {
+                if (i == 0 || (m-1) == i) storeE.push({i,j});
+                else if (j == 0 || (n-1) == j) storeE.push({i,j});
+            }
+        }
+        
+    }
+    
+    while (!storeE.empty())
+    {
+        
+        pair<int,int> current = storeE.top();
+        storeE.pop();
+        
+        int r = current.first;
+        int c = current.second;
+
+        grid[r][c] = 0;
+        
+        for (size_t k = 0; k < 4; k++) {
+            
+            int ir = r + posX[k];
+            int jc = c + posY[k];
+            if ((ir >= 0 && ir < m && jc >= 0 && jc < n) && grid[ir][jc] == 1)
+            {
+                storeE.push({ir,jc});
+            }
+            
+        }
+    }
+
+    int sumE = 0;
+
+    for( auto line : grid){
+        for (auto x : line){
+            if (x == 1) sumE++;
+        }
+    }
+
+    return sumE;
+
+}
+
+
+
+int main ()
+{   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    // vector<vector<int>> grid = {{0,0,0,0},
+    //                             {1,0,1,0},
+    //                             {0,1,1,0},
+    //                             {0,0,0,0},};
+
+    vector<vector<int>> grid = {{0,0,1,1,1,0,1,1,1,0,1},
+                                {1,1,1,1,0,1,0,1,1,0,0},
+                                {0,1,0,1,1,0,0,0,0,1,0},
+                                {1,0,1,1,1,1,1,0,0,0,1},
+                                {0,0,1,0,1,1,0,0,1,0,0},
+                                {1,0,0,1,1,1,0,0,0,1,1},
+                                {0,1,0,1,1,0,0,0,1,0,0},
+                                {0,1,1,0,1,0,1,1,1,0,0},
+                                {1,1,0,1,1,1,0,0,0,0,0},
+                                {1,0,1,1,0,0,0,1,0,0,1}};
+ 
+    cout<<numEnclaves(grid)<<"\n";
+    return 0;
+    
+}
+
+```
+
+<p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/NumberofEnclaves.cpp">code link</a>)</p>
+
+### LeetCode screenshots
+
+<div>
+<img src="./ejercicios_18-11-2021/Capturas/NumberofEnclaves.png" width="1000">
+</div>
+
+
 ### Asteroid Collision
 
 
