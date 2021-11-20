@@ -24,8 +24,9 @@
 
 ## Ejercicios_18-11-2021 (PRACTICA CALIFICADA)
 
+### Asteroid Collision
 
-* Asteroid Collision
+
   ```cpp     
     #include <bits/stdc++.h>
     using namespace std;
