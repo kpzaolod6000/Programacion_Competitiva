@@ -97,7 +97,7 @@
 ### LeetCode screenshots
 
 <div>
-<img src="./ejercicios_18-11-2021/Capturas/asteroidCollision.JPG" width="1000">
+<img src="./ejercicios_18-11-2021/Capturas/asteroidCollision.png" width="1000">
 </div>
 
 
