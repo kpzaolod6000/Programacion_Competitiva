@@ -25,7 +25,7 @@
 ## Ejercicios_18-11-2021 (PRACTICA CALIFICADA)
 
 
-### Coast Length
+### Coast Length:
 
 ```cpp
 #include <bits/stdc++.h>
@@ -128,7 +128,7 @@ int main ()
 </div>
 
 
-### Dungeon Game
+### Dungeon Game:
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -181,7 +181,8 @@ int main ()
 </div>
 
 
-### Unique Paths
+### Unique Paths:
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -229,7 +230,8 @@ int main ()
 </div>
 
 
-### Pacific Atlantic Water Flow
+### Pacific Atlantic Water Flow:
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -339,7 +341,8 @@ int main ()
 <p align="right">(<a href="https://github.com/kpzaolod6000/Programacion_Competitiva/tree/main/ejercicios_18-11-2021/PacificAtlanticWaterFlow.cpp">code link</a>)</p>
 
 
-### Gregory the Grasshopper
+### Gregory the Grasshopper:
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -417,7 +420,7 @@ int main ()
 </div>
 
 
-### Keys and Rooms
+### Keys and Rooms:
 
 ```cpp 
 #include <bits/stdc++.h>
@@ -495,7 +498,7 @@ int main ()
 
 
 
-### Counting Stars
+### Counting Stars:
 
 ```cpp 
 #include <bits/stdc++.h>
@@ -596,7 +599,7 @@ int main ()
 </div>
 
 
-### Sheba's Amoebas
+### Sheba's Amoebas:
 
 
 ```cpp 
@@ -693,7 +696,7 @@ int main ()
 
 
 
-### Number of Enclaves
+### Number of Enclaves:
 
 
 ```cpp 
@@ -799,7 +802,7 @@ int main ()
 </div>
 
 
-### Asteroid Collision
+### Asteroid Collision:
 
 
 ```cpp     
