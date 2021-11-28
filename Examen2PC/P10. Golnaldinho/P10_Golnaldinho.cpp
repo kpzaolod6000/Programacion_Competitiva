@@ -42,7 +42,6 @@ int main ()
         printf("%d%s", (idx - sum_Index(Deletion_items,idx)), (i == n ? "\n" : " "));
         update(Deletion_items,idx, 1);
     }
-    cout<<"\n";
     return 0;
     
 }
