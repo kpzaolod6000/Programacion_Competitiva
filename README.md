@@ -26,15 +26,16 @@
 
 ### Codigos
 
+
 | Name                                                           | Solution                   | URL                   |
 | -------------------------------------------------------------- | -------------------------- | --------------------------|
-|P1. Stack Construction           | [P1_Stack_Construction.cpp](./Examen2PC/P1.%Stack%Construction/P1_Stack_Construction.cpp)|[Stack Construction](https://open.kattis.com/problems/stack)|
-|P2. Broken Keyboard                                              | [P2_BrokenKeyboard.cpp](./Examen2PC/P2.%Broken%Keyboard/P2_BrokenKeyboard.cpp)|[Broken Keyboard](https://www.beecrowd.com.br/judge/en/problems/view/1642)|
-|P3. Rectangle Cutting                                             | [P3_Rectangle_cutting.cpp](./Examen2PC/P3.%Rectangle%Cutting/P3_Rectangle_cutting.cpp)| [ Rectangle Cutting](https://cses.fi/problemset/task/1744)|
-|P4. Elevator Rides                                           | [P4_ElevatorRides.cpp](./Examen2PC/P4.%Elevator%Rides/P4_ElevatorRides.cpp)| [ Elevator Rides](https://cses.fi/problemset/task/1653)|
-|P5. Monsters                                         | [P5_Monsters.cpp](./Examen2PC/P5.%Monsters/P5_Monsters.cpp)| [Monsters](https://cses.fi/problemset/task/1194)|
-|P6. Dungeon master                                       | [P6_DungeonMaster.cpp](./Examen2PC/P6.%Dungeon%master/P6_DungeonMaster.cpp)| [Dungeon master](https://open.kattis.com/problems/dungeon)|
-|P10. Golnaldinho                                | [P10_Golnaldinho.cpp](./Examen2PC/P10.%Golnaldinho/P10_Golnaldinho.cpp)| [Golnaldinho](https://www.beecrowd.com.br/judge/en/problems/view/2792)|
+|P1. Stack Construction           | [P1_Stack_Construction.cpp](./Examen2PC/P1.%20Stack%20Construction/P1_Stack_Construction.cpp)|[Stack Construction](https://open.kattis.com/problems/stack)|
+|P2. Broken Keyboard                                              | [P2_BrokenKeyboard.cpp](./Examen2PC/P2.%20Broken%20Keyboard/P2_BrokenKeyboard.cpp)|[Broken Keyboard](https://www.beecrowd.com.br/judge/en/problems/view/1642)|
+|P3. Rectangle Cutting                                             | [P3_Rectangle_cutting.cpp](./Examen2PC/P3.%20Rectangle%20Cutting/P3_Rectangle_cutting.cpp)| [ Rectangle Cutting](https://cses.fi/problemset/task/1744)|
+|P4. Elevator Rides                                           | [P4_ElevatorRides.cpp](./Examen2PC/P4.%20Elevator%20Rides/P4_ElevatorRides.cpp)| [ Elevator Rides](https://cses.fi/problemset/task/1653)|
+|P5. Monsters                                         | [P5_Monsters.cpp](./Examen2PC/P5.%20Monsters/P5_Monsters.cpp)| [Monsters](https://cses.fi/problemset/task/1194)|
+|P6. Dungeon master                                       | [P6_DungeonMaster.cpp](./Examen2PC/P6.%20Dungeon%20master/P6_DungeonMaster.cpp)| [Dungeon master](https://open.kattis.com/problems/dungeon)|
+|P10. Golnaldinho                                | [P10_Golnaldinho.cpp](./Examen2PC/P10.%20Golnaldinho/P10_Golnaldinho.cpp)| [Golnaldinho](https://www.beecrowd.com.br/judge/en/problems/view/2792)|
 
 
 ## Ejercicios_18-11-2021 (PRACTICA CALIFICADA)
