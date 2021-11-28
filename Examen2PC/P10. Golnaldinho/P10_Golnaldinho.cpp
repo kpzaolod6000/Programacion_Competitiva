@@ -39,8 +39,7 @@ int main ()
     int idx;
     for(int i = 1; i <= n; i++){
         cin>>idx;
-        
-        cout<<idx-sum_Index(Deletion_items,idx)<<" ";
+        printf("%d%s", (idx - sum_Index(Deletion_items,idx)), (i == n ? "\n" : " "));
         update(Deletion_items,idx, 1);
     }
     cout<<"\n";
