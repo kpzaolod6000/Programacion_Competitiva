@@ -9,7 +9,7 @@ int main(){
 
     while (true)
     {
-        int max_substring = 0;
+        
         int n_key;
         cin>>n_key;
         
@@ -17,15 +17,16 @@ int main(){
         if(n_key == 0) break;
         else
         {
-            cin.ignore();
-            char text[1000010];
-            if (fgets(text, 1000010, stdin) != NULL){
             
-            //
+            char cin_text[1000010];
+            cin.ignore();
+            if (fgets(cin_text, 1000010, stdin) != NULL){
+                string text = cin_text;
+                int max_substring = 0;
             
                 vector<int> subS_cnt(128);
                 int start = 0,end = n_key-1;
-                int n_text = 1000010;
+                int n_text = text.length();
                 int k_u = 0;
                 int cnt_aux = 0;
                 //int aux_m = 0;
@@ -67,7 +68,8 @@ int main(){
                         }
                     }
                 }
-                cout<<max_substring<<"\n";
+                
+                printf("%d\n", max_substring);
                 //break;
             }
         }
