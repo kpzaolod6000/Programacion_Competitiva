@@ -28,7 +28,7 @@
 
 | Name                                                           | Solution                   | URL                   |
 | -------------------------------------------------------------- | -------------------------- | --------------------------|
-|P1. Stack Construction           | [P1_Stack_Construction.cpp](./Examen2PC/P1.%Stack%Construction/P1_Stack_Construction.cpp)|[Stack Construction](https://open.kattis.com/problems/stack)|
+|P1. Stack Construction           | [P1_Stack_Construction.cpp](./Examen2PC/P1. Stack Construction/P1_Stack_Construction.cpp)|[Stack Construction](https://open.kattis.com/problems/stack)|
 |P2. Broken Keyboard                                              | [P2_BrokenKeyboard.cpp](./Examen2PC/P2.%Broken%Keyboard/P2_BrokenKeyboard.cpp)|[Broken Keyboard](https://www.beecrowd.com.br/judge/en/problems/view/1642)|
 |P3. Rectangle Cutting                                             | [P3_Rectangle_cutting.cpp](./Examen2PC/P3.%Rectangle%Cutting/P3_Rectangle_cutting.cpp)| [ Rectangle Cutting](https://cses.fi/problemset/task/1744)|
 |P4. Elevator Rides                                           | [P4_ElevatorRides.cpp](./Examen2PC/P4.%Elevator%Rides/P4_ElevatorRides.cpp)| [ Elevator Rides](https://cses.fi/problemset/task/1653)|
