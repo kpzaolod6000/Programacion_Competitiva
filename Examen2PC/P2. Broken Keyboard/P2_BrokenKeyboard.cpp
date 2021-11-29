@@ -63,8 +63,9 @@ int main(){
 
     while (true)
     {
-      
-        scanf("%d", &n_key);
+        
+        int n_key;
+        scanf("%d", &keys);
         getchar();
 
         if(n_key != 0){
