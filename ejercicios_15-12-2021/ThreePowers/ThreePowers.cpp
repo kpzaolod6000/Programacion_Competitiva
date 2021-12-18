@@ -15,24 +15,24 @@ void calc(ll n){
     cout<<"{ ";
     while (n > 0){
         if ( (n & 1) == 1){
-            string h = 
-            if (elements == 0) cout<<to_string(pow(3,shifts));
-            else cout<<", "<<to_string(pow(3,shifts));
-            elements += 1;
+            
+            if (elements == 0) cout<<pow(3,shifts);
+            else cout<<", "<<pow(3,shifts);
+            elements++;
         }
         n >>= 1;
-        shifts += 1;
+        shifts++;
     }
     cout<<" }"<<endl;
 }
 
 int main(){
 
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    ll n;
-    while(cin>>n){
+ 
+    while (true)
+    {
+        ll n;
+        cin >> n;
         if (n == 0) break;
         calc(n-1);
     }
